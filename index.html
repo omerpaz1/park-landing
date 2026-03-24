@@ -29,6 +29,7 @@
       <a href="#how">איך זה עובד</a>
       <a href="#screens">האפליקציה</a>
       <a href="#for-whom">למי מתאים</a>
+      <a href="#pricing">תמחור</a>
       <a href="#faq">שאלות נפוצות</a>
     </div>
     <a href="mailto:omerpaz93@gmail.com?subject=רוצה להצטרף ל-BuildingPark&amp;body=שלום, אשמח לשמוע עוד על BuildingPark ולהצטרף עם הבניין שלי." class="btn btn--sm btn--solid nav__cta">צרו קשר</a>
@@ -40,6 +41,7 @@
     <a href="#how">איך זה עובד</a>
     <a href="#screens">האפליקציה</a>
     <a href="#for-whom">למי מתאים</a>
+    <a href="#pricing">תמחור</a>
     <a href="#faq">שאלות נפוצות</a>
     <a href="mailto:omerpaz93@gmail.com?subject=רוצה להצטרף ל-BuildingPark&amp;body=שלום, אשמח לשמוע עוד על BuildingPark ולהצטרף עם הבניין שלי." class="btn btn--solid btn--block">צרו קשר</a>
   </div>
@@ -47,33 +49,36 @@
 
 <!-- ======================== HERO ======================== -->
 <section class="hero" id="hero">
-  <div class="wrap hero__inner">
-    <span class="pill"><img src="images/logo.png" alt="" class="pill__logo" width="22" height="22"> ניהול חנייה חכם</span>
-    <h1>ניהול חניות לבנייני מגורים —<br><span class="grad">פשוט, חכם וקהילתי</span></h1>
-    <p class="hero__sub">בקש חניה מהשכנים, שתף כשאתה לא בבית<br class="br-desk"> וקבל התראות בזמן אמת</p>
-    <div class="hero__cta">
-      <a href="mailto:omerpaz93@gmail.com?subject=רוצה להצטרף ל-BuildingPark&amp;body=שלום, אשמח לשמוע עוד על BuildingPark ולהצטרף עם הבניין שלי." class="btn btn--solid btn--lg">צרו קשר להצטרפות</a>
-      <a href="#how" class="btn btn--ghost btn--lg">איך זה עובד?</a>
-    </div>
-    <div class="hero__trust">
-      <span class="hero__check"><i>✓</i> חינם לדיירים</span>
-      <span class="hero__check"><i>✓</i> iOS + Android</span>
-      <span class="hero__check"><i>✓</i> הגדרה תוך דקות</span>
-    </div>
-
-    <div class="hero__screens">
-      <div class="hero__screen">
-        <img src="images/app-create.png" alt="בקשת חניה חדשה" loading="eager">
+  <div class="wrap hero__grid">
+    <div class="hero__content">
+      <span class="pill"><img src="images/logo.png" alt="" class="pill__logo" width="22" height="22"> ניהול חנייה חכם</span>
+      <h1>חניה פנויה בבניין —<br><span class="grad">בלי טלפונים ובלי הודעות</span></h1>
+      <p class="hero__sub">אפליקציה לניהול ושיתוף חניות בין דיירים, הגשת בקשות והתראות בזמן אמת — במקום קבוצות וואטסאפ ובלגן</p>
+      <div class="hero__cta">
+        <a href="#pricing" class="btn btn--solid btn--lg">התחל לבניין שלך</a>
+        <a href="mailto:omerpaz93@gmail.com?subject=בקשת הדגמה — BuildingPark&amp;body=שלום, אשמח לקבל הדגמה של BuildingPark עבור הבניין/חברת הניהול שלי." class="btn btn--outline btn--lg">בקש הדגמה</a>
       </div>
-      <div class="hero__screen hero__screen--lift">
-        <img src="images/app-approved.png" alt="חניה אושרה" loading="eager">
+      <div class="hero__trust">
+        <span class="hero__check"><i>✓</i> ללא התקנה מורכבת</span>
+        <span class="hero__check"><i>✓</i> עובד בכל סמארטפון</span>
+        <span class="hero__check"><i>✓</i> תוך דקות הבניין באוויר</span>
       </div>
-      <div class="hero__screen">
-        <img src="images/app-notifications.png" alt="התראות בזמן אמת" loading="eager">
+      <p class="hero__note">פתרון ייעודי לוועדי בתים ולחברות ניהול</p>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__screens">
+        <div class="hero__screen">
+          <img src="images/app-create.png" alt="בקשת חניה חדשה" loading="eager">
+        </div>
+        <div class="hero__screen hero__screen--lift">
+          <img src="images/app-approved.png" alt="חניה אושרה" loading="eager">
+        </div>
+        <div class="hero__screen">
+          <img src="images/app-notifications.png" alt="התראות בזמן אמת" loading="eager">
+        </div>
       </div>
     </div>
   </div>
-
   <div class="hero__glow" aria-hidden="true"></div>
 </section>
 
@@ -142,39 +147,47 @@
       <p>צילומי מסך אמיתיים מהאפליקציה — בדיוק מה שתראו</p>
     </header>
 
-    <div class="gallery">
-      <div class="gallery__item" data-v>
-        <img src="images/app-create.png" alt="יצירת בקשת חנייה" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">בקשת חניה חדשה</span>
+    <div class="carousel">
+      <button class="carousel__arrow carousel__arrow--right" aria-label="הקודם" id="gallery-right">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,18 15,12 9,6"/></svg>
+      </button>
+      <div class="gallery" id="gallery">
+        <div class="gallery__item" data-v>
+          <img src="images/app-create.png" alt="יצירת בקשת חנייה" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">בקשת חניה חדשה</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-request-detail.png" alt="פרטי בקשה — הצע חנייה" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">הצעת חניה לשכן</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-approved.png" alt="חניה אושרה — פרטי חניה" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">חניה אושרה!</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-notifications.png" alt="מסך התראות" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">התראות בזמן אמת</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-my-requests.png" alt="מעקב אחרי בקשות" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">מעקב אחרי בקשות</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-management.png" alt="ניהול דירות ודיירים" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">ניהול בניין ודיירים</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-profile.png" alt="פרופיל אישי" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">פרופיל אישי</span>
+        </div>
+        <div class="gallery__item" data-v>
+          <img src="images/app-login.png" alt="מסך כניסה" loading="lazy" width="460" height="996">
+          <span class="gallery__cap">כניסה מהירה עם Google</span>
+        </div>
       </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-request-detail.png" alt="פרטי בקשה — הצע חנייה" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">הצעת חניה לשכן</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-approved.png" alt="חניה אושרה — פרטי חניה" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">חניה אושרה!</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-notifications.png" alt="מסך התראות" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">התראות בזמן אמת</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-my-requests.png" alt="מעקב אחרי בקשות" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">מעקב אחרי בקשות</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-management.png" alt="ניהול דירות ודיירים" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">ניהול בניין ודיירים</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-profile.png" alt="פרופיל אישי" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">פרופיל אישי</span>
-      </div>
-      <div class="gallery__item" data-v>
-        <img src="images/app-login.png" alt="מסך כניסה" loading="lazy" width="460" height="996">
-        <span class="gallery__cap">כניסה מהירה עם Google</span>
-      </div>
+      <button class="carousel__arrow carousel__arrow--left" aria-label="הבא" id="gallery-left">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+      </button>
     </div>
   </div>
 </section>
@@ -257,8 +270,62 @@
   </div>
 </section>
 
+<!-- ======================== PRICING ======================== -->
+<section class="sec" id="pricing">
+  <div class="wrap">
+    <header class="sec__head">
+      <span class="pill pill--sm">תמחור</span>
+      <h2>תמחור פשוט וברור</h2>
+      <p>מחיר קבוע לבניין — ללא עלויות נסתרות</p>
+    </header>
+
+    <div class="pricing">
+      <div class="pricing__card pricing__card--featured" data-v>
+        <span class="pricing__badge">מחיר השקה</span>
+        <div class="pricing__head">
+          <h3>ועד בית</h3>
+          <p class="pricing__desc">לבניין מגורים בודד</p>
+        </div>
+        <div class="pricing__price">
+          <span class="pricing__amount">₪59</span>
+          <span class="pricing__period">/ חודש</span>
+        </div>
+        <ul class="pricing__features">
+          <li>ניהול בקשות חניה לדיירים</li>
+          <li>שיתוף חניות בין שכנים</li>
+          <li>התראות חכמות בזמן אמת</li>
+          <li>ניהול דיירים וחניות</li>
+          <li>ממשק ניהול לוועד הבית</li>
+          <li>תמיכה בעברית מלאה</li>
+        </ul>
+        <a href="mailto:omerpaz93@gmail.com?subject=רוצה להתחיל עם BuildingPark — ועד בית&amp;body=שלום, אשמח להתחיל להשתמש ב-BuildingPark עבור הבניין שלי." class="btn btn--solid btn--block pricing__btn">התחל עכשיו</a>
+      </div>
+
+      <div class="pricing__card" data-v>
+        <div class="pricing__head">
+          <h3>חברת ניהול</h3>
+          <p class="pricing__desc">עד 10 בניינים בניהול</p>
+        </div>
+        <div class="pricing__price">
+          <span class="pricing__amount">₪299</span>
+          <span class="pricing__period">/ חודש</span>
+        </div>
+        <ul class="pricing__features">
+          <li>ניהול מספר בניינים במקום אחד</li>
+          <li>ממשק ניהול מרכזי</li>
+          <li>הוספת מנהלי בניינים</li>
+          <li>ניהול דיירים וחניות לכל בניין</li>
+          <li>תצוגה כללית והתראות</li>
+          <li>תמיכה מלאה</li>
+        </ul>
+        <a href="mailto:omerpaz93@gmail.com?subject=רוצה להתחיל עם BuildingPark — חברת ניהול&amp;body=שלום, אני מנהל/ת חברת ניהול ואשמח לשמוע עוד על BuildingPark." class="btn btn--outline btn--block pricing__btn">צור קשר</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ======================== FAQ ======================== -->
-<section class="sec" id="faq">
+<section class="sec sec--gray" id="faq">
   <div class="wrap wrap--sm">
     <header class="sec__head">
       <span class="pill pill--sm">שאלות נפוצות</span>
@@ -298,7 +365,7 @@
 </section>
 
 <!-- ======================== TRUST ======================== -->
-<section class="sec sec--gray" id="trust">
+<section class="sec" id="trust">
   <div class="wrap">
     <div class="trust">
       <h2>דיירים כבר משתמשים בבניינים ברחבי הארץ</h2>
@@ -387,6 +454,24 @@
   },{threshold:.12, rootMargin:'0px 0px -48px 0px'});
 
   $$('[data-v]').forEach(function(el){ io.observe(el) });
+
+  var gal = $('#gallery'), gRight = $('#gallery-right'), gLeft = $('#gallery-left');
+  if(gal && gRight && gLeft){
+    var scrollAmt = 260;
+    function updateArrows(){
+      var sl = gal.scrollLeft;
+      var maxScroll = gal.scrollWidth - gal.clientWidth;
+      var atStart = sl >= -4;
+      var atEnd = sl <= -(maxScroll - 4);
+      gRight.classList.toggle('hide', atStart);
+      gLeft.classList.toggle('hide', atEnd);
+    }
+    gLeft.addEventListener('click',function(){ gal.scrollBy({left:-scrollAmt,behavior:'smooth'}) });
+    gRight.addEventListener('click',function(){ gal.scrollBy({left:scrollAmt,behavior:'smooth'}) });
+    gal.addEventListener('scroll',updateArrows,{passive:true});
+    updateArrows();
+    new ResizeObserver(updateArrows).observe(gal);
+  }
 })();
 </script>
 

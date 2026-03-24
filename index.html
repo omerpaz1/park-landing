@@ -459,18 +459,20 @@
   if(gal && gRight && gLeft){
     var scrollAmt = 260;
     function updateArrows(){
-      var sl = gal.scrollLeft;
-      var maxScroll = gal.scrollWidth - gal.clientWidth;
-      var atStart = sl >= -4;
-      var atEnd = sl <= -(maxScroll - 4);
+      var sw = gal.scrollWidth, cw = gal.clientWidth;
+      if(sw <= cw){ gRight.classList.add('hide'); gLeft.classList.add('hide'); return; }
+      var sl = Math.abs(gal.scrollLeft);
+      var max = sw - cw;
+      var atStart = sl < 8;
+      var atEnd = sl > max - 8;
       gRight.classList.toggle('hide', atStart);
       gLeft.classList.toggle('hide', atEnd);
     }
     gLeft.addEventListener('click',function(){ gal.scrollBy({left:-scrollAmt,behavior:'smooth'}) });
     gRight.addEventListener('click',function(){ gal.scrollBy({left:scrollAmt,behavior:'smooth'}) });
     gal.addEventListener('scroll',updateArrows,{passive:true});
-    updateArrows();
-    new ResizeObserver(updateArrows).observe(gal);
+    setTimeout(updateArrows,100);
+    if(window.ResizeObserver) new ResizeObserver(updateArrows).observe(gal);
   }
 })();
 </script>

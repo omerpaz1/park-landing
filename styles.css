@@ -118,9 +118,9 @@ h3{font-size:1.15rem;font-weight:600}
 .nav__hamburger.active span:nth-child(2){opacity:0}
 .nav__hamburger.active span:nth-child(3){transform:rotate(-45deg) translateY(-7px)}
 
-.nav__mobile{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--g-100);max-height:calc(100dvh - 64px);overflow-y:auto}
+.nav__mobile{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--g-100);max-height:calc(100dvh - 64px);overflow-y:auto;text-align:right}
 .nav__mobile.open{display:flex}
-.nav__mobile a:not(.btn){padding:16px 24px;font-size:1.0625rem;font-weight:500;color:var(--g-700);border-bottom:1px solid var(--g-100);transition:background .15s}
+.nav__mobile a:not(.btn){padding:16px 24px;font-size:1.0625rem;font-weight:500;color:var(--g-700);border-bottom:1px solid var(--g-100);transition:background .15s;text-align:right}
 .nav__mobile a:not(.btn):active{background:var(--g-50)}
 .nav__mobile .btn{margin:16px 24px}
 
@@ -380,23 +380,24 @@ h3{font-size:1.15rem;font-weight:600}
   flex:1;max-width:360px;
   background:#fff;border-radius:var(--r-xl);
   border:1px solid var(--g-200);
+  box-shadow:0 4px 16px rgba(0,0,0,.06);
   padding:40px 32px 36px;
   display:flex;flex-direction:column;
   position:relative;
   transition:all .3s var(--ease);
 }
 .pricing__card:hover{
-  box-shadow:0 12px 36px rgba(0,0,0,.08);
+  box-shadow:0 12px 36px rgba(0,0,0,.1);
   border-color:var(--c-200);
   transform:translateY(-4px);
 }
 
 .pricing__card--featured{
-  border-color:var(--c-500);
-  box-shadow:0 8px 28px rgba(37,99,235,.12);
+  border:2px solid var(--c-500);
+  box-shadow:0 8px 28px rgba(37,99,235,.14);
 }
 .pricing__card--featured:hover{
-  box-shadow:0 16px 44px rgba(37,99,235,.18);
+  box-shadow:0 16px 44px rgba(37,99,235,.2);
   border-color:var(--c-600);
 }
 

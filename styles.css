@@ -96,6 +96,7 @@ h3{font-size:1.15rem;font-weight:600}
   transition:background .3s,box-shadow .3s;
 }
 .nav--scrolled{background:rgba(255,255,255,.94);box-shadow:0 1px 3px rgba(0,0,0,.05)}
+.nav--open{background:#fff!important}
 
 .nav__inner{display:flex;align-items:center;height:64px;gap:12px}
 .nav__brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:1.1rem;flex-shrink:0}
@@ -118,11 +119,17 @@ h3{font-size:1.15rem;font-weight:600}
 .nav__hamburger.active span:nth-child(2){opacity:0}
 .nav__hamburger.active span:nth-child(3){transform:rotate(-45deg) translateY(-7px)}
 
-.nav__mobile{display:none;flex-direction:column;background:#fff;border-top:1px solid var(--g-100);max-height:calc(100dvh - 64px);overflow-y:auto;text-align:right}
+.nav__mobile{
+  display:none;flex-direction:column;
+  position:fixed;top:56px;left:0;right:0;bottom:0;
+  background:#fff;z-index:999;
+  padding-top:8px;overflow-y:auto;
+  text-align:right;
+}
 .nav__mobile.open{display:flex}
-.nav__mobile a:not(.btn){padding:16px 24px;font-size:1.0625rem;font-weight:500;color:var(--g-700);border-bottom:1px solid var(--g-100);transition:background .15s;text-align:right}
+.nav__mobile a:not(.btn){padding:18px 24px;font-size:1.125rem;font-weight:500;color:var(--g-700);border-bottom:1px solid var(--g-100);transition:background .15s;text-align:right}
 .nav__mobile a:not(.btn):active{background:var(--g-50)}
-.nav__mobile .btn{margin:16px 24px}
+.nav__mobile .btn{margin:20px 24px}
 
 /* ============================================================
    HERO — B2B two-column layout
@@ -577,7 +584,7 @@ h3{font-size:1.15rem;font-weight:600}
 
   /* nav */
   .nav__links,.nav__cta{display:none}
-  .nav__hamburger{display:flex}
+  .nav__hamburger{display:flex;margin-inline-start:auto}
   .nav__inner{height:56px}
   .m-cta{display:block}
 

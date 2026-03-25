@@ -425,12 +425,14 @@
   tog.addEventListener('click',function(){
     var open = mob.classList.toggle('open');
     tog.classList.toggle('active');
+    nav.classList.toggle('nav--open', open);
     document.body.style.overflow = open ? 'hidden' : '';
   });
 
   $$('#nav-mobile a').forEach(function(a){
     a.addEventListener('click',function(){
       mob.classList.remove('open'); tog.classList.remove('active');
+      nav.classList.remove('nav--open');
       document.body.style.overflow = '';
     });
   });

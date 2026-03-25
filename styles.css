@@ -128,7 +128,7 @@ h3{font-size:1.15rem;font-weight:600}
 .nav__mobile.open{display:flex}
 .nav__mobile a:not(.btn){padding:18px 24px;font-size:1.125rem;font-weight:500;color:var(--g-700);border-bottom:1px solid var(--g-100);transition:background .15s;text-align:right}
 .nav__mobile a:not(.btn):active{background:var(--g-50)}
-.nav__mobile .btn{margin:20px 24px}
+.nav__mobile .btn{margin:20px 24px;width:calc(100% - 48px)}
 
 /* ============================================================
    HERO — B2B two-column layout

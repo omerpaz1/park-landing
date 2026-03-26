@@ -175,34 +175,18 @@ h3{font-size:1.15rem;font-weight:600}
   display:flex;align-items:center;justify-content:center;
 }
 
-.hero__screens{
-  display:flex;
-  align-items:flex-end;
-  justify-content:center;
-  gap:16px;
-  direction:ltr;
-}
-.hero__screen{
-  width:160px;flex-shrink:0;
-  border-radius:18px;overflow:hidden;
-  box-shadow:0 4px 24px rgba(0,0,0,.1);
+.hero__device{
+  max-width:300px;width:100%;
+  border-radius:28px;overflow:hidden;
+  box-shadow:0 12px 48px rgba(0,0,0,.12),0 2px 8px rgba(0,0,0,.06);
   border:1px solid var(--g-100);
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
+  transition:transform .5s var(--ease),box-shadow .5s var(--ease);
 }
-.hero__screen img{width:100%;height:auto;display:block}
-.hero__screen:hover{
-  transform:translateY(-6px);
-  box-shadow:0 12px 40px rgba(0,0,0,.14);
+.hero__device:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 64px rgba(0,0,0,.16),0 4px 12px rgba(0,0,0,.08);
 }
-.hero__screen--lift{
-  width:180px;
-  transform:translateY(-14px);
-  box-shadow:0 8px 32px rgba(0,0,0,.13);
-}
-.hero__screen--lift:hover{
-  transform:translateY(-20px);
-  box-shadow:0 16px 48px rgba(0,0,0,.16);
-}
+.hero__device img{width:100%;height:auto;display:block}
 
 .hero__glow{
   position:absolute;top:-30%;left:25%;
@@ -677,8 +661,7 @@ h3{font-size:1.15rem;font-weight:600}
    ============================================================ */
 @media(max-width:1024px){
   .hero__grid{gap:32px}
-  .hero__screen{width:140px}
-  .hero__screen--lift{width:155px}
+  .hero__device{max-width:260px}
 }
 
 /* ============================================================
@@ -704,10 +687,7 @@ h3{font-size:1.15rem;font-weight:600}
   .hero__trust{justify-content:center;gap:14px;margin-top:28px}
   .hero__check{font-size:.75rem}
   .hero__note{text-align:center}
-  .hero__screens{gap:10px}
-  .hero__screen{width:120px;border-radius:14px}
-  .hero__screen--lift{width:135px;transform:translateY(-10px)}
-  .hero__screen--lift:hover{transform:translateY(-14px)}
+  .hero__device{max-width:240px;border-radius:22px}
 
   /* sections */
   .sec{padding:72px 0}
@@ -790,9 +770,7 @@ h3{font-size:1.15rem;font-weight:600}
 @media(max-width:420px){
   .wrap{padding:0 16px}
   h1{font-size:1.625rem}
-  .hero__screens{gap:6px}
-  .hero__screen{width:100px;border-radius:12px}
-  .hero__screen--lift{width:112px;transform:translateY(-8px)}
+  .hero__device{max-width:200px;border-radius:20px}
   .perks{grid-template-columns:1fr}
   .trust__row{flex-direction:column;align-items:stretch}
   .trust__pill{flex-direction:row;justify-content:center;gap:12px;padding:16px 20px}

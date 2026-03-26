@@ -328,6 +328,107 @@ h3{font-size:1.15rem;font-weight:600}
 .carousel__arrow.hide{opacity:0;pointer-events:none}
 
 /* ============================================================
+   SCREENS TRIO — minimal 3-phone layout
+   ============================================================ */
+.screens-trio{
+  display:flex;align-items:flex-end;justify-content:center;
+  gap:24px;direction:ltr;
+}
+
+.screens-trio__item{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  width:200px;flex-shrink:0;
+}
+.screens-trio__item img{
+  width:100%;border-radius:22px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  border:1px solid var(--g-100);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.screens-trio__item:hover img{
+  transform:translateY(-8px);
+  box-shadow:0 16px 48px rgba(0,0,0,.13);
+}
+.screens-trio__item--lift{
+  width:220px;
+  transform:translateY(-16px);
+}
+.screens-trio__item--lift img{
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+}
+.screens-trio__item--lift:hover img{
+  transform:translateY(-10px);
+  box-shadow:0 20px 56px rgba(0,0,0,.15);
+}
+.screens-trio__cap{
+  font-size:.875rem;font-weight:600;color:var(--g-500);text-align:center;
+}
+
+/* ============================================================
+   SHOWCASE — management feature sections
+   ============================================================ */
+.showcase{
+  display:grid;
+  grid-template-columns:1fr 1.3fr;
+  gap:56px;
+  align-items:center;
+}
+
+.showcase--reverse{direction:ltr}
+.showcase--reverse .showcase__text{direction:rtl}
+.showcase--reverse .showcase__screens{direction:ltr}
+
+.showcase__text h3{
+  font-size:1.4rem;font-weight:700;
+  margin-bottom:20px;color:var(--g-900);
+}
+
+.showcase__list{
+  display:flex;flex-direction:column;gap:14px;
+  margin-bottom:36px;
+}
+.showcase__list li{
+  display:flex;align-items:center;gap:10px;
+  font-size:1rem;color:var(--g-600);line-height:1.6;
+}
+.showcase__list li::before{
+  content:'✓';display:inline-flex;align-items:center;justify-content:center;
+  width:22px;height:22px;border-radius:50%;flex-shrink:0;
+  background:var(--c-50);color:var(--c-600);font-size:.7rem;font-weight:700;
+}
+
+.showcase__screens{
+  display:flex;gap:16px;align-items:flex-end;
+  justify-content:center;direction:ltr;
+}
+
+.showcase__phone{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  width:180px;flex-shrink:0;
+}
+.showcase__phone img{
+  width:100%;border-radius:20px;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);
+  border:1px solid var(--g-100);
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease);
+}
+.showcase__phone:hover img{
+  transform:translateY(-6px);
+  box-shadow:0 12px 40px rgba(0,0,0,.13);
+}
+.showcase__phone--main{width:210px}
+.showcase__phone--main img{
+  box-shadow:0 8px 32px rgba(0,0,0,.1);
+}
+
+.showcase__cap{
+  font-size:.8125rem;font-weight:600;color:var(--g-500);
+  text-align:center;
+}
+
+.showcase__cta{margin-top:8px}
+
+/* ============================================================
    PERKS — benefits grid
    ============================================================ */
 .perks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
@@ -563,6 +664,11 @@ h3{font-size:1.15rem;font-weight:600}
 .faq__item:nth-child(4){--i:3}.faq__item:nth-child(5){--i:4}
 .faq__item:nth-child(6){--i:5}.faq__item:nth-child(7){--i:6}
 
+.screens-trio__item:nth-child(2)[data-v]{transition-delay:.08s}
+.screens-trio__item:nth-child(3)[data-v]{transition-delay:.16s}
+
+.showcase__screens[data-v]{transition-delay:.1s}
+
 .trust__pill:nth-child(2)[data-v]{transition-delay:.06s}
 .trust__pill:nth-child(3)[data-v]{transition-delay:.12s}
 
@@ -624,6 +730,25 @@ h3{font-size:1.15rem;font-weight:600}
   .carousel__arrow--right{right:4px}
   .carousel__arrow--left{left:4px}
 
+  /* screens trio */
+  .screens-trio{gap:14px}
+  .screens-trio__item{width:150px}
+  .screens-trio__item--lift{width:170px;transform:translateY(-12px)}
+  .screens-trio__item img{border-radius:16px}
+  .screens-trio__cap{font-size:.75rem}
+
+  /* showcase */
+  .showcase{grid-template-columns:1fr;gap:40px;text-align:center}
+  .showcase--reverse{direction:rtl}
+  .showcase__text{order:1}
+  .showcase__text h3{text-align:center}
+  .showcase__list{align-items:flex-start;text-align:right}
+  .showcase__screens{order:2}
+  .showcase__phone{width:140px}
+  .showcase__phone--main{width:165px}
+  .showcase__phone img{border-radius:16px}
+  .showcase__cta{margin-inline:auto}
+
   /* perks */
   .perks{grid-template-columns:repeat(2,1fr);gap:12px}
   .perk{padding:24px 16px}
@@ -671,6 +796,16 @@ h3{font-size:1.15rem;font-weight:600}
   .perks{grid-template-columns:1fr}
   .trust__row{flex-direction:column;align-items:stretch}
   .trust__pill{flex-direction:row;justify-content:center;gap:12px;padding:16px 20px}
+  .screens-trio{gap:8px}
+  .screens-trio__item{width:115px}
+  .screens-trio__item--lift{width:130px;transform:translateY(-8px)}
+  .screens-trio__item img{border-radius:14px}
+
+  .showcase__phone{width:115px}
+  .showcase__phone--main{width:135px}
+  .showcase__phone img{border-radius:14px}
+  .showcase__screens{gap:10px}
+
   .gallery__item{flex:0 0 155px}
   .carousel__arrow{width:32px;height:32px}
   .carousel__arrow svg{width:14px;height:14px}

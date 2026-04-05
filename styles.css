@@ -196,6 +196,36 @@ h3{font-size:1.15rem;font-weight:600}
 }
 
 /* ============================================================
+   PAIN SECTION
+   ============================================================ */
+.pain{padding:80px 0;background:#fff}
+
+.pain__title{
+  text-align:center;font-size:clamp(1.5rem,3.5vw,2.2rem);
+  font-weight:800;color:var(--g-900);margin-bottom:40px;
+}
+
+.pain__list{
+  display:flex;flex-direction:column;gap:18px;
+  max-width:420px;margin:0 auto;list-style:none;
+}
+.pain__list li{
+  display:flex;align-items:center;gap:14px;
+  font-size:1.1rem;font-weight:500;color:var(--g-700);
+  background:var(--g-50);border-radius:var(--r);padding:16px 22px;
+  border:1px solid var(--g-100);transition:all .25s var(--ease);
+}
+.pain__list li:hover{background:#fff;box-shadow:0 4px 16px rgba(0,0,0,.06);border-color:var(--g-200)}
+
+.pain__icon{font-size:1.4rem;flex-shrink:0;width:36px;text-align:center}
+
+.pain__solution{
+  text-align:center;margin-top:40px;
+  font-size:1.3rem;font-weight:700;
+  color:var(--c-600);
+}
+
+/* ============================================================
    SECTIONS — shared
    ============================================================ */
 .sec{padding:96px 0}
@@ -248,6 +278,29 @@ h3{font-size:1.15rem;font-weight:600}
 .flow__arrow-h{width:40px;height:20px;display:block}
 .flow__arrow-v{display:none}
 [dir="rtl"] .flow__arrow-h{transform:scaleX(-1)}
+
+/* ---- flow mode toggle ---- */
+.flow__modes{
+  display:flex;justify-content:center;gap:6px;
+  margin-bottom:40px;
+  background:var(--g-100);border-radius:var(--r-pill);
+  padding:4px;max-width:400px;margin-inline:auto;
+}
+.flow__mode{
+  flex:1;padding:10px 20px;border:none;border-radius:var(--r-pill);
+  font-family:var(--font);font-size:.9375rem;font-weight:600;
+  cursor:pointer;transition:all .25s var(--ease);
+  background:transparent;color:var(--g-500);
+  -webkit-tap-highlight-color:transparent;
+}
+.flow__mode:hover{color:var(--g-700)}
+.flow__mode--active{
+  background:#fff;color:var(--c-600);
+  box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.flow__wrap{display:none}
+.flow__wrap--active{display:block}
 
 .flow__note{
   text-align:center;margin-top:36px;
@@ -415,7 +468,7 @@ h3{font-size:1.15rem;font-weight:600}
 /* ============================================================
    PERKS — benefits grid
    ============================================================ */
-.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.perks{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;max-width:900px;margin:0 auto}
 
 .perk{
   text-align:center;padding:32px 20px;
@@ -529,6 +582,47 @@ h3{font-size:1.15rem;font-weight:600}
   background:var(--c-50);color:var(--c-600);font-size:.65rem;font-weight:700;
 }
 
+.pricing__was{
+  font-size:.9rem;color:var(--g-400);text-decoration:line-through;
+  margin-top:-20px;margin-bottom:24px;
+}
+
+.pricing__card--mgmt{
+  border:2px solid var(--g-200);
+  box-shadow:0 6px 24px rgba(0,0,0,.08);
+}
+.pricing__card--mgmt:hover{
+  box-shadow:0 14px 40px rgba(0,0,0,.12);
+  border-color:var(--c-300,#93bbfd);
+}
+
+.pricing__amount-text{
+  font-size:1.75rem;font-weight:800;
+  color:var(--g-900);letter-spacing:-.02em;
+}
+
+.pricing__examples{
+  display:flex;flex-direction:column;gap:10px;
+  margin-bottom:20px;padding:16px;
+  background:var(--g-50);border-radius:var(--r);
+}
+.pricing__example{
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:.9375rem;color:var(--g-600);
+}
+.pricing__example strong{color:var(--g-800);font-weight:700}
+
+.pricing__min{
+  font-size:.8125rem;color:var(--g-400);
+  margin-bottom:24px;text-align:center;
+}
+
+.pricing__trust{
+  display:flex;justify-content:center;gap:28px;flex-wrap:wrap;
+  margin-top:40px;font-size:.9375rem;color:var(--g-500);font-weight:500;
+}
+.pricing__trust span{display:flex;align-items:center;gap:4px}
+
 .pricing__btn{padding:14px 24px;font-size:1rem;margin-top:auto}
 
 /* ============================================================
@@ -562,21 +656,26 @@ h3{font-size:1.15rem;font-weight:600}
 .faq__body p{color:var(--g-500);font-size:.9375rem;line-height:1.8}
 
 /* ============================================================
-   TRUST
+   VALUE LINE
    ============================================================ */
-.trust{text-align:center;max-width:600px;margin:0 auto}
-.trust h2{margin-bottom:10px}
-.trust__sub{color:var(--g-500);font-size:1.05rem;margin-bottom:40px}
-
-.trust__row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
-.trust__pill{
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  background:#fff;border-radius:var(--r-xl);padding:24px 28px;
-  border:1px solid var(--g-200);min-width:150px;transition:all .3s var(--ease);
+.value-line{padding:72px 0;background:#fff}
+.value-line__text{
+  text-align:center;
+  font-size:clamp(1.4rem,3.5vw,2.2rem);
+  font-weight:800;color:var(--g-900);
+  max-width:600px;margin:0 auto;
+  line-height:1.4;
 }
-.trust__pill:hover{box-shadow:0 6px 20px rgba(0,0,0,.06);border-color:var(--c-200)}
-.trust__pill strong{font-size:1.2rem;font-weight:800;color:var(--c-600)}
-.trust__pill span{font-size:.8125rem;color:var(--g-500)}
+
+/* ============================================================
+   TRUST STRIP
+   ============================================================ */
+.trust-strip{padding:48px 0}
+.trust-strip__text{
+  text-align:center;
+  font-size:1.15rem;font-weight:500;
+  color:var(--g-500);letter-spacing:.01em;
+}
 
 /* ============================================================
    CTA
@@ -637,7 +736,6 @@ h3{font-size:1.15rem;font-weight:600}
 .perk:nth-child(3)[data-v]{transition-delay:.08s}
 .perk:nth-child(4)[data-v]{transition-delay:.12s}
 .perk:nth-child(5)[data-v]{transition-delay:.16s}
-.perk:nth-child(6)[data-v]{transition-delay:.20s}
 
 .whom__card:nth-child(2)[data-v]{transition-delay:.08s}
 
@@ -653,8 +751,9 @@ h3{font-size:1.15rem;font-weight:600}
 
 .showcase__screens[data-v]{transition-delay:.1s}
 
-.trust__pill:nth-child(2)[data-v]{transition-delay:.06s}
-.trust__pill:nth-child(3)[data-v]{transition-delay:.12s}
+.pain__list li:nth-child(2)[data-v]{transition-delay:.06s}
+.pain__list li:nth-child(3)[data-v]{transition-delay:.12s}
+.pain__list li:nth-child(4)[data-v]{transition-delay:.18s}
 
 /* ============================================================
    RESPONSIVE — TABLET
@@ -749,8 +848,19 @@ h3{font-size:1.15rem;font-weight:600}
   .faq__item summary{padding:16px 20px;font-size:.9375rem}
   .faq__body{padding:0 20px 16px}
 
-  /* trust */
-  .trust__pill{padding:20px 22px;min-width:130px;flex:1}
+  /* pain */
+  .pain{padding:56px 0}
+  .pain__list li{font-size:1rem;padding:14px 18px}
+
+  /* value line */
+  .value-line{padding:56px 0}
+
+  /* trust strip */
+  .trust-strip{padding:36px 0}
+  .trust-strip__text{font-size:1rem}
+
+  /* pricing trust */
+  .pricing__trust{gap:16px;font-size:.8125rem}
 
   /* cta */
   .sec--cta{padding:72px 0}
@@ -772,8 +882,7 @@ h3{font-size:1.15rem;font-weight:600}
   h1{font-size:1.625rem}
   .hero__device{max-width:200px;border-radius:20px}
   .perks{grid-template-columns:1fr}
-  .trust__row{flex-direction:column;align-items:stretch}
-  .trust__pill{flex-direction:row;justify-content:center;gap:12px;padding:16px 20px}
+  .pricing__trust{flex-direction:column;align-items:center;gap:8px}
   .screens-trio{gap:8px}
   .screens-trio__item{width:115px}
   .screens-trio__item--lift{width:130px;transform:translateY(-8px)}

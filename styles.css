@@ -582,8 +582,8 @@ h3{font-size:1.15rem;font-weight:600}
   background:var(--c-50);color:var(--c-600);font-size:.65rem;font-weight:700;
 }
 
-.pricing__was{
-  font-size:.9rem;color:var(--g-400);text-decoration:line-through;
+.pricing__note{
+  font-size:.85rem;color:var(--g-400);font-weight:500;
   margin-top:-20px;margin-bottom:24px;
 }
 

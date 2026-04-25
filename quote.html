@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>הצעת מחיר — BuildingPark</title>
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#2563eb">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/png" href="/images/logo.png">
+
+  <style>
+    *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --c-50:#eff6ff;--c-100:#dbeafe;--c-500:#3b82f6;--c-600:#2563eb;--c-700:#1d4ed8;
+      --g-50:#f9fafb;--g-100:#f3f4f6;--g-200:#e5e7eb;--g-300:#d1d5db;
+      --g-400:#9ca3af;--g-500:#6b7280;--g-600:#4b5563;--g-700:#374151;
+      --g-800:#1f2937;--g-900:#111827;
+      --green-50:#ecfdf5;--green-100:#d1fae5;--green-600:#059669;--green-700:#047857;
+      --amber-50:#fffbeb;--amber-200:#fde68a;--amber-700:#b45309;
+      --red-50:#fef2f2;--red-200:#fecaca;--red-700:#b91c1c;
+      --r:12px;--r-lg:18px;--r-pill:9999px;
+      --shadow-sm:0 1px 2px rgba(0,0,0,.04);
+      --shadow:0 4px 14px rgba(15,23,42,.06);
+      --shadow-lg:0 12px 32px rgba(15,23,42,.08);
+      --font:'Heebo',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    }
+    html{-webkit-text-size-adjust:100%}
+    body{
+      font-family:var(--font);font-size:16px;line-height:1.6;
+      color:var(--g-800);background:var(--g-50);
+      -webkit-font-smoothing:antialiased;
+      min-height:100vh;
+    }
+    .wrap{width:100%;max-width:760px;margin:0 auto;padding:24px 20px 64px}
+
+    /* Trust banner */
+    .trust{
+      display:flex;align-items:center;gap:10px;
+      background:#fff;border:1px solid var(--g-200);
+      border-radius:var(--r-pill);padding:8px 16px 8px 12px;
+      box-shadow:var(--shadow-sm);
+      margin:0 auto 20px;width:fit-content;
+    }
+    .trust__logo{width:24px;height:24px;border-radius:6px}
+    .trust__text{font-size:.875rem;font-weight:600;color:var(--g-700)}
+    .trust__check{color:var(--green-600);font-weight:700}
+
+    /* Header card */
+    .header-card{
+      background:#fff;border-radius:var(--r-lg);padding:28px 24px 24px;
+      box-shadow:var(--shadow);
+      border:1px solid var(--g-200);
+      margin-bottom:16px;
+    }
+    .header-card__num{
+      font-size:.75rem;color:var(--g-500);font-weight:600;
+      text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;
+      direction:ltr;text-align:right;
+    }
+    .header-card__title{
+      font-size:1.625rem;font-weight:800;color:var(--g-900);
+      letter-spacing:-.02em;line-height:1.25;margin-bottom:6px;
+    }
+    .header-card__subtitle{font-size:.95rem;color:var(--g-600);margin-bottom:18px}
+
+    /* Validity strip */
+    .validity{
+      display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;
+      padding:12px 14px;border-radius:var(--r);
+      background:var(--amber-50);border:1px solid var(--amber-200);
+      font-size:.875rem;color:var(--amber-700);font-weight:600;
+    }
+    .validity--neutral{background:var(--c-50);border-color:var(--c-100);color:var(--c-700)}
+    .validity--expired{background:var(--red-50);border-color:var(--red-200);color:var(--red-700)}
+    .validity__icon{font-size:1rem}
+
+    /* Sender row */
+    .sent-by{
+      display:flex;align-items:center;gap:10px;
+      margin-top:14px;padding-top:14px;border-top:1px solid var(--g-100);
+      font-size:.875rem;color:var(--g-600);
+    }
+    .sent-by__avatar{
+      width:32px;height:32px;border-radius:50%;
+      background:linear-gradient(135deg,var(--c-500),var(--c-700));
+      color:#fff;display:flex;align-items:center;justify-content:center;
+      font-weight:700;font-size:.875rem;
+    }
+    .sent-by__name{font-weight:600;color:var(--g-800)}
+
+    /* Generic card */
+    .card{
+      background:#fff;border-radius:var(--r-lg);
+      box-shadow:var(--shadow);border:1px solid var(--g-200);
+      padding:24px;margin-bottom:16px;
+    }
+    .card__title{
+      font-size:.875rem;font-weight:700;color:var(--g-500);
+      text-transform:uppercase;letter-spacing:.05em;margin-bottom:14px;
+    }
+
+    /* Building info */
+    .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .info-grid__item .label{font-size:.75rem;color:var(--g-500);font-weight:600;margin-bottom:2px}
+    .info-grid__item .value{font-size:.95rem;color:var(--g-800);font-weight:500}
+
+    /* Line items */
+    .lineitems{font-size:.95rem}
+    .lineitems__row{
+      display:flex;justify-content:space-between;align-items:center;
+      padding:10px 0;border-bottom:1px solid var(--g-100);
+    }
+    .lineitems__row:last-child{border-bottom:none}
+    .lineitems__label{flex:1;color:var(--g-700)}
+    .lineitems__qty{color:var(--g-500);font-size:.875rem;margin:0 10px}
+    .lineitems__price{font-weight:600;direction:ltr;font-feature-settings:"tnum"}
+
+    /* Totals */
+    .totals{margin-top:14px;padding-top:14px;border-top:2px solid var(--g-100)}
+    .totals__row{
+      display:flex;justify-content:space-between;align-items:baseline;
+      padding:6px 0;font-size:.95rem;color:var(--g-700);
+    }
+    .totals__row--final{
+      margin-top:8px;padding:14px 16px;border-radius:var(--r);
+      background:var(--g-900);color:#fff;
+    }
+    .totals__row--final .totals__label{font-weight:700;font-size:1.05rem}
+    .totals__row--final .totals__value{font-weight:800;font-size:1.25rem}
+    .totals__value{direction:ltr;font-feature-settings:"tnum"}
+
+    /* CTAs */
+    .ctas{display:grid;gap:10px}
+    .btn{
+      display:inline-flex;align-items:center;justify-content:center;gap:8px;
+      font-family:var(--font);font-weight:600;font-size:1rem;
+      padding:14px 22px;border-radius:var(--r-pill);cursor:pointer;
+      border:none;width:100%;
+      transition:transform .15s ease,box-shadow .15s ease,background .15s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .btn:active{transform:translateY(1px)}
+    .btn--primary{
+      background:var(--green-600);color:#fff;
+      box-shadow:0 4px 14px rgba(5,150,105,.28);
+      font-size:1.05rem;padding:16px 22px;
+    }
+    .btn--primary:hover{background:var(--green-700)}
+    .btn--secondary{
+      background:var(--c-600);color:#fff;
+      box-shadow:0 4px 14px rgba(37,99,235,.24);
+    }
+    .btn--secondary:hover{background:var(--c-700)}
+    .btn--ghost{
+      background:#fff;color:var(--g-600);
+      border:1px solid var(--g-300);
+    }
+    .btn--ghost:hover{background:var(--g-50);color:var(--g-800)}
+    .btn[disabled]{opacity:.6;cursor:not-allowed}
+
+    .cta-hint{
+      margin:-2px 0 4px;text-align:center;
+      font-size:.8125rem;color:var(--g-500);font-weight:500;
+    }
+    .cta-hint::before{content:"⏱  ";color:var(--c-600)}
+
+    /* Confirmation panel */
+    .confirm{
+      background:var(--g-50);border:1px solid var(--g-200);
+      border-radius:var(--r);padding:16px;margin-top:12px;
+    }
+    .confirm__title{font-weight:700;color:var(--g-900);margin-bottom:6px}
+    .confirm__hint{font-size:.875rem;color:var(--g-600);margin-bottom:12px}
+    .confirm textarea{
+      width:100%;padding:10px 12px;border:1px solid var(--g-300);
+      border-radius:var(--r);font-family:var(--font);font-size:.95rem;
+      resize:vertical;min-height:80px;background:#fff;
+    }
+    .confirm textarea:focus{outline:none;border-color:var(--c-500)}
+    .confirm__actions{display:flex;gap:8px;margin-top:12px}
+    .confirm__actions .btn{padding:10px 18px;font-size:.875rem}
+
+    /* Done state */
+    .done{
+      background:#fff;border:1px solid var(--g-200);border-radius:var(--r-lg);
+      padding:32px 24px;text-align:center;box-shadow:var(--shadow);
+    }
+    .done__icon{
+      width:60px;height:60px;border-radius:50%;
+      background:var(--green-50);color:var(--green-600);
+      display:flex;align-items:center;justify-content:center;
+      font-size:2rem;font-weight:800;margin:0 auto 14px;
+    }
+    .done__icon--info{background:var(--c-50);color:var(--c-600)}
+    .done__icon--neutral{background:var(--g-100);color:var(--g-500)}
+    .done__title{font-size:1.25rem;font-weight:700;color:var(--g-900);margin-bottom:8px}
+    .done__text{color:var(--g-600);font-size:.95rem}
+
+    /* States */
+    .skeleton{
+      animation:pulse 1.6s ease-in-out infinite;
+      background:linear-gradient(90deg,var(--g-100) 0%,var(--g-200) 50%,var(--g-100) 100%);
+      background-size:200% 100%;border-radius:var(--r);
+    }
+    @keyframes pulse{0%{background-position:200% 0}100%{background-position:-200% 0}}
+    .skeleton--text{height:14px;margin:8px 0}
+    .skeleton--xl{height:32px;width:60%;margin-bottom:12px}
+
+    .error-card{
+      background:#fff;border:1px solid var(--red-200);
+      border-radius:var(--r-lg);padding:32px 24px;text-align:center;
+      box-shadow:var(--shadow);
+    }
+    .error-card h2{font-size:1.25rem;font-weight:700;color:var(--red-700);margin-bottom:8px}
+    .error-card p{color:var(--g-600);font-size:.95rem}
+
+    .footer{
+      margin-top:24px;text-align:center;font-size:.75rem;color:var(--g-400);
+    }
+    .footer a{color:var(--g-500);font-weight:500}
+
+    @media (max-width:480px){
+      .info-grid{grid-template-columns:1fr}
+      .header-card__title{font-size:1.4rem}
+    }
+
+    [hidden]{display:none !important}
+  </style>
+</head>
+<body>
+
+  <main class="wrap">
+    <!-- Trust banner -->
+    <div class="trust">
+      <img src="/images/logo.png" alt="" class="trust__logo" onerror="this.style.display='none'">
+      <span class="trust__text">
+        <span class="trust__check">✓</span>
+        הצעה רשמית מ-BuildingPark
+      </span>
+    </div>
+
+    <!-- Loading skeleton -->
+    <section id="state-loading" class="card">
+      <div class="skeleton skeleton--xl"></div>
+      <div class="skeleton skeleton--text"></div>
+      <div class="skeleton skeleton--text"></div>
+      <div class="skeleton skeleton--text" style="width:60%"></div>
+    </section>
+
+    <!-- Error state -->
+    <section id="state-error" class="error-card" hidden>
+      <h2>הצעת המחיר אינה זמינה</h2>
+      <p id="state-error-text">הקישור שגוי או שההצעה כבר אינה פעילה. אם אתה חושב שזו טעות, צור איתנו קשר.</p>
+    </section>
+
+    <!-- Quote view -->
+    <section id="state-quote" hidden>
+
+      <!-- Header / hero -->
+      <div class="header-card">
+        <div id="quote-num" class="header-card__num">#—</div>
+        <h1 id="quote-building" class="header-card__title">—</h1>
+        <p id="quote-address" class="header-card__subtitle">—</p>
+
+        <div id="quote-validity" class="validity validity--neutral">
+          <span class="validity__icon">⏳</span>
+          <span id="quote-validity-text">בתוקף</span>
+        </div>
+
+        <div id="quote-sentby" class="sent-by" hidden>
+          <div id="quote-sentby-avatar" class="sent-by__avatar">—</div>
+          <div>
+            <div style="font-size:.75rem;color:var(--g-500)">נשלח על ידי</div>
+            <div id="quote-sentby-name" class="sent-by__name">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Building info -->
+      <div class="card">
+        <div class="card__title">פרטי הבניין</div>
+        <div class="info-grid">
+          <div class="info-grid__item">
+            <div class="label">מספר דירות</div>
+            <div class="value" id="quote-apartments">—</div>
+          </div>
+          <div class="info-grid__item">
+            <div class="label">איש קשר</div>
+            <div class="value" id="quote-contact">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Line items + totals -->
+      <div class="card">
+        <div class="card__title">פירוט ההצעה</div>
+        <div id="quote-lineitems" class="lineitems"></div>
+        <div class="totals">
+          <div class="totals__row">
+            <span class="totals__label">סה"כ לפני מע"מ</span>
+            <span class="totals__value" id="quote-subtotal">—</span>
+          </div>
+          <div class="totals__row">
+            <span class="totals__label">מע"מ <span id="quote-vat-pct">—</span>%</span>
+            <span class="totals__value" id="quote-vat">—</span>
+          </div>
+          <div class="totals__row totals__row--final">
+            <span class="totals__label">סה"כ לתשלום (כולל מע"מ)</span>
+            <span class="totals__value" id="quote-total">—</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notes (operator → prospect) -->
+      <div id="quote-notes-card" class="card" hidden>
+        <div class="card__title">הערות</div>
+        <div id="quote-notes" style="white-space:pre-wrap;color:var(--g-700);font-size:.95rem;"></div>
+      </div>
+
+      <!-- CTAs -->
+      <div id="ctas-card" class="card">
+        <div class="card__title">איך תרצה להמשיך?</div>
+        <div class="ctas">
+          <button id="cta-accept" class="btn btn--primary" type="button">אני מעוניין להתקדם</button>
+          <button id="cta-callback" class="btn btn--secondary" type="button">
+            <span>בקשת שיחת חזרה</span>
+          </button>
+          <p class="cta-hint" id="cta-callback-hint">נחזור אליכם תוך יום עסקים אחד</p>
+          <button id="cta-reject" class="btn btn--ghost" type="button">כרגע לא מתאים, תודה</button>
+        </div>
+
+        <!-- Confirmation panel -->
+        <div id="confirm" class="confirm" hidden>
+          <div class="confirm__title" id="confirm-title">—</div>
+          <div class="confirm__hint" id="confirm-hint">—</div>
+          <textarea id="confirm-feedback" placeholder=""></textarea>
+          <div class="confirm__actions">
+            <button id="confirm-submit" class="btn btn--primary" type="button">שליחה</button>
+            <button id="confirm-cancel" class="btn btn--ghost" type="button">ביטול</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Done state (replaces CTAs after submit) -->
+      <div id="done" class="done" hidden>
+        <div class="done__icon" id="done-icon">✓</div>
+        <h2 class="done__title" id="done-title">תודה!</h2>
+        <p class="done__text" id="done-text">—</p>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>BuildingPark · ניהול חניות חכם לבניינים · <a href="/">חזרה לאתר הראשי</a></p>
+    </footer>
+  </main>
+
+  <!-- Backend API origin — injected at runtime by nginx envsubst (see nginx.conf) -->
+  <script src="/q/config.js"></script>
+  <script>
+  (function(){
+    'use strict';
+
+    // ── Token + API resolution ─────────────────────────────────────────────
+    var match = window.location.pathname.match(/\/q\/([A-Za-z0-9_\-]+)$/);
+    var token = match ? match[1] : null;
+
+    // BUILDINGPARK_API is set by /q/config.js (envsubst from BACKEND_API_URL).
+    // Fallback to ?api=... for local testing only.
+    var qsApi = new URLSearchParams(window.location.search).get('api');
+    var apiBase = qsApi || (window.BUILDINGPARK_API && window.BUILDINGPARK_API.replace(/\/+$/, '')) || '';
+
+    var els = {
+      loading: document.getElementById('state-loading'),
+      error: document.getElementById('state-error'),
+      errorText: document.getElementById('state-error-text'),
+      quote: document.getElementById('state-quote'),
+      num: document.getElementById('quote-num'),
+      building: document.getElementById('quote-building'),
+      address: document.getElementById('quote-address'),
+      validity: document.getElementById('quote-validity'),
+      validityText: document.getElementById('quote-validity-text'),
+      sentBy: document.getElementById('quote-sentby'),
+      sentByName: document.getElementById('quote-sentby-name'),
+      sentByAvatar: document.getElementById('quote-sentby-avatar'),
+      apartments: document.getElementById('quote-apartments'),
+      contact: document.getElementById('quote-contact'),
+      lineitems: document.getElementById('quote-lineitems'),
+      subtotal: document.getElementById('quote-subtotal'),
+      vatPct: document.getElementById('quote-vat-pct'),
+      vat: document.getElementById('quote-vat'),
+      total: document.getElementById('quote-total'),
+      notesCard: document.getElementById('quote-notes-card'),
+      notes: document.getElementById('quote-notes'),
+      ctasCard: document.getElementById('ctas-card'),
+      confirm: document.getElementById('confirm'),
+      confirmTitle: document.getElementById('confirm-title'),
+      confirmHint: document.getElementById('confirm-hint'),
+      confirmFeedback: document.getElementById('confirm-feedback'),
+      confirmSubmit: document.getElementById('confirm-submit'),
+      confirmCancel: document.getElementById('confirm-cancel'),
+      done: document.getElementById('done'),
+      doneIcon: document.getElementById('done-icon'),
+      doneTitle: document.getElementById('done-title'),
+      doneText: document.getElementById('done-text'),
+    };
+
+    function show(el){ el.hidden = false; }
+    function hide(el){ el.hidden = true; }
+
+    function showError(message){
+      hide(els.loading); hide(els.quote);
+      if (message) els.errorText.textContent = message;
+      show(els.error);
+    }
+
+    // ── Helpers ────────────────────────────────────────────────────────────
+    function escapeHtml(s){
+      return String(s == null ? '' : s)
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+
+    function formatHebrewDate(iso){
+      if (!iso) return '';
+      var d = new Date(iso);
+      if (isNaN(d.getTime())) return '';
+      return new Intl.DateTimeFormat('he-IL', {
+        day:'2-digit', month:'2-digit', year:'numeric'
+      }).format(d);
+    }
+
+    function initials(name){
+      if (!name) return '·';
+      var parts = name.trim().split(/\s+/);
+      return (parts[0][0] || '') + (parts.length > 1 ? parts[parts.length-1][0] : '');
+    }
+
+    function buildUrl(path){
+      if (!apiBase) throw new Error('Backend API URL not configured');
+      return apiBase + path;
+    }
+
+    function callApi(path, opts){
+      opts = opts || {};
+      return fetch(buildUrl(path), {
+        method: opts.method || 'GET',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: opts.body ? JSON.stringify(opts.body) : undefined,
+      }).then(function(res){
+        return res.json().then(function(json){
+          if (!res.ok || !json || json.success === false){
+            var msg = (json && (json.message || json.error)) || ('HTTP ' + res.status);
+            var err = new Error(msg); err.status = res.status; err.code = json && json.code;
+            throw err;
+          }
+          return json.data;
+        });
+      });
+    }
+
+    // ── Render ─────────────────────────────────────────────────────────────
+    function renderQuote(q){
+      els.num.textContent = '#' + q.number;
+      els.building.textContent = q.buildingName;
+      els.address.textContent = [q.address, q.city].filter(Boolean).join(', ');
+
+      // Validity strip
+      if (q.validUntil){
+        var dateStr = formatHebrewDate(q.validUntil);
+        if (q.isExpired){
+          els.validity.className = 'validity validity--expired';
+          els.validityText.innerHTML = 'פג תוקף ב-' + escapeHtml(dateStr);
+        } else if (q.daysUntilExpiry != null && q.daysUntilExpiry <= 7){
+          els.validity.className = 'validity';
+          els.validityText.innerHTML = 'בתוקף עד <strong>' + escapeHtml(dateStr) + '</strong> · ' +
+            q.daysUntilExpiry + ' ימים נותרו';
+        } else {
+          els.validity.className = 'validity validity--neutral';
+          els.validityText.innerHTML = 'בתוקף עד <strong>' + escapeHtml(dateStr) + '</strong>' +
+            (q.daysUntilExpiry != null ? ' · ' + q.daysUntilExpiry + ' ימים נותרו' : '');
+        }
+      } else {
+        hide(els.validity);
+      }
+
+      // Sender (trust signal)
+      if (q.sentBy && q.sentBy.name){
+        els.sentByName.textContent = q.sentBy.name;
+        els.sentByAvatar.textContent = initials(q.sentBy.name);
+        show(els.sentBy);
+      }
+
+      els.apartments.textContent = q.apartmentsCount + ' דירות';
+      els.contact.textContent = q.contactName;
+
+      // Line items
+      var rows = '';
+      (q.lineItems || []).forEach(function(li){
+        var qty = li.quantity > 1 ? '×' + li.quantity : '';
+        rows += '<div class="lineitems__row">' +
+          '<span class="lineitems__label">' + escapeHtml(li.label) + '</span>' +
+          (qty ? '<span class="lineitems__qty">' + qty + '</span>' : '') +
+          '<span class="lineitems__price">' + escapeHtml(li.unitPriceFormatted) + '</span>' +
+          '</div>';
+      });
+      els.lineitems.innerHTML = rows || '<div class="lineitems__row"><span class="lineitems__label">—</span></div>';
+
+      els.subtotal.textContent = q.totals.subtotalFormatted;
+      els.vatPct.textContent = q.totals.vatRatePercent;
+      els.vat.textContent = q.totals.vatFormatted;
+      els.total.textContent = q.totals.totalFormatted;
+
+      if (q.notes && q.notes.trim()){
+        els.notes.textContent = q.notes;
+        show(els.notesCard);
+      }
+
+      // CTAs only when actionable
+      if (!q.isActionable){
+        hide(els.ctasCard);
+        if (q.status === 'ACCEPTED'){
+          showDone('info', 'תודה!', 'אישרת את ההצעה. ניצור איתך קשר בהקדם להמשך התהליך.');
+        } else if (q.status === 'REJECTED'){
+          showDone('neutral', 'נרשם', 'תודה על העדכון. אם תרצה לחזור אלינו, אנחנו זמינים.');
+        } else if (q.status === 'CONVERTED'){
+          showDone('info', 'הבניין כבר פעיל', 'הבניין שלך כבר רשום במערכת BuildingPark.');
+        } else if (q.isExpired){
+          showDone('neutral', 'הצעה פגה תוקף', 'אם תרצה הצעה מעודכנת, נשמח לשלוח לך אחת חדשה.');
+        }
+      }
+
+      hide(els.loading); show(els.quote);
+    }
+
+    // ── Confirmation flow ──────────────────────────────────────────────────
+    var pendingAction = null; // 'accept' | 'reject' | 'callback'
+
+    var ACTION_CONFIG = {
+      accept: {
+        title: 'אני מעוניין להתקדם',
+        hint: 'נחזור אליך בהקדם להשלמת התהליך. אם יש משהו שתרצה לציין — נשמח לשמוע.',
+        placeholder: 'הערות (לא חובה)',
+        path: '/api/v1/public/quotes/' + token + '/accept',
+        success: { icon: '✓', kind: 'info', title: 'תודה!', text: 'קיבלנו את אישורך. ניצור איתך קשר בהקדם להמשך התהליך.' },
+      },
+      callback: {
+        title: 'בקשת שיחת חזרה',
+        hint: 'מתי נוח לך שנחזור אליך? לדוגמה: "מחר בערב" או "יום ראשון אחרי 16:00".',
+        placeholder: 'הערות / זמן מועדף',
+        path: '/api/v1/public/quotes/' + token + '/request-callback',
+        success: { icon: '📞', kind: 'info', title: 'נחזור אליך', text: 'הבקשה נרשמה. ניצור איתך קשר בהקדם.' },
+      },
+      reject: {
+        title: 'כרגע לא מתאים, תודה',
+        hint: 'אם תרצה לשתף אותנו בסיבה — זה יעזור לנו להשתפר. לא חובה.',
+        placeholder: 'סיבה / הערה (לא חובה)',
+        path: '/api/v1/public/quotes/' + token + '/reject',
+        success: { icon: '·', kind: 'neutral', title: 'נרשם', text: 'תודה על העדכון. אם תרצה לחזור אלינו, אנחנו תמיד זמינים.' },
+      },
+    };
+
+    function openConfirm(action){
+      pendingAction = action;
+      var cfg = ACTION_CONFIG[action];
+      els.confirmTitle.textContent = cfg.title;
+      els.confirmHint.textContent = cfg.hint;
+      els.confirmFeedback.placeholder = cfg.placeholder;
+      els.confirmFeedback.value = '';
+      els.confirmSubmit.disabled = false;
+      show(els.confirm);
+      els.confirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      els.confirmFeedback.focus();
+    }
+
+    function closeConfirm(){
+      pendingAction = null;
+      hide(els.confirm);
+    }
+
+    function showDone(kind, title, text){
+      hide(els.ctasCard);
+      els.doneIcon.className = 'done__icon' + (kind === 'info' ? ' done__icon--info' : (kind === 'neutral' ? ' done__icon--neutral' : ''));
+      if (title) els.doneTitle.textContent = title;
+      if (text) els.doneText.textContent = text;
+      show(els.done);
+      els.done.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    function submitAction(){
+      if (!pendingAction) return;
+      var cfg = ACTION_CONFIG[pendingAction];
+      els.confirmSubmit.disabled = true;
+      els.confirmSubmit.textContent = 'שולח…';
+
+      var feedback = els.confirmFeedback.value.trim().slice(0, 2000);
+      callApi(cfg.path, { method: 'POST', body: { feedback: feedback || null } })
+        .then(function(){
+          showDone(cfg.success.kind, cfg.success.title, cfg.success.text);
+        })
+        .catch(function(err){
+          els.confirmSubmit.disabled = false;
+          els.confirmSubmit.textContent = 'שליחה';
+          alert('הפעולה נכשלה. ' + (err && err.message ? err.message : 'נסה שוב בעוד רגע.'));
+        });
+    }
+
+    // ── Wire up ────────────────────────────────────────────────────────────
+    document.getElementById('cta-accept').addEventListener('click', function(){ openConfirm('accept'); });
+    document.getElementById('cta-callback').addEventListener('click', function(){ openConfirm('callback'); });
+    document.getElementById('cta-reject').addEventListener('click', function(){ openConfirm('reject'); });
+    els.confirmSubmit.addEventListener('click', submitAction);
+    els.confirmCancel.addEventListener('click', closeConfirm);
+
+    // ── Boot ───────────────────────────────────────────────────────────────
+    if (!token){ showError('הקישור שגוי.'); return; }
+    if (!apiBase){ showError('שירות BuildingPark אינו זמין כרגע. נסה שוב בעוד רגע.'); return; }
+
+    callApi('/api/v1/public/quotes/' + token)
+      .then(function(q){
+        renderQuote(q);
+        // Fire-and-forget view tracking; ignore failures.
+        callApi('/api/v1/public/quotes/' + token + '/view', { method: 'POST' }).catch(function(){});
+      })
+      .catch(function(err){
+        if (err.status === 404) showError('הצעת המחיר לא נמצאה. הקישור עשוי להיות פג תוקף.');
+        else if (err.status === 422) showError('הצעת המחיר אינה זמינה כרגע.');
+        else showError(err && err.message ? err.message : 'שירות BuildingPark אינו זמין כרגע.');
+      });
+  })();
+  </script>
+</body>
+</html>

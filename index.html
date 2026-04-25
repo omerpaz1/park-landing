@@ -291,12 +291,21 @@
         <p class="pricing__minimum">מינימום 149 ₪ לבניין לחודש</p>
 
         <div class="calc" role="group" aria-labelledby="calc-label">
-          <p class="calc__label" id="calc-label">כמה דירות יש בבניין?</p>
-          <div class="calc__chips" role="radiogroup" aria-label="מספר דירות">
-            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="10">10</button>
-            <button type="button" class="calc__chip is-active" role="radio" aria-checked="true" data-apts="20">20</button>
-            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="30">30</button>
-            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="40">40</button>
+          <div class="calc__top">
+            <span class="calc__label" id="calc-label">מספר דירות בבניין</span>
+            <span class="calc__count"><span id="calc-apts">20</span></span>
+          </div>
+          <input
+            type="range"
+            class="calc__slider"
+            id="calc-slider"
+            min="5" max="100" step="1" value="20"
+            aria-labelledby="calc-label"
+            aria-valuemin="5" aria-valuemax="100" aria-valuenow="20"
+          >
+          <div class="calc__scale" aria-hidden="true">
+            <span>5</span>
+            <span>100</span>
           </div>
           <div class="calc__result">
             <span class="calc__result-label">מחיר חודשי:</span>
@@ -462,29 +471,34 @@
   // Pricing calculator: monthly = max(MIN, apartments * RATE)
   var PRICE_PER_APT = 6;
   var MIN_PRICE = 149;
-  var calcChips = $$('.calc__chip');
+  var slider = $('#calc-slider');
   var calcOut = $('#calc-price');
-  if(calcChips.length && calcOut){
+  var aptsOut = $('#calc-apts');
+  if(slider && calcOut){
     var format = function(n){ return n.toLocaleString('en-US') + ' ₪' };
-    var setPrice = function(apts){
-      var price = Math.max(MIN_PRICE, apts * PRICE_PER_APT);
-      calcOut.textContent = format(price);
-      calcOut.classList.remove('is-flash');
-      // restart animation
-      void calcOut.offsetWidth;
-      calcOut.classList.add('is-flash');
+    var paintTrack = function(val){
+      var mn = parseInt(slider.min,10) || 0;
+      var mx = parseInt(slider.max,10) || 100;
+      var pct = ((val - mn) / (mx - mn)) * 100;
+      slider.style.setProperty('--calc-fill', pct + '%');
     };
-    calcChips.forEach(function(chip){
-      chip.addEventListener('click', function(){
-        calcChips.forEach(function(c){
-          c.classList.remove('is-active');
-          c.setAttribute('aria-checked','false');
-        });
-        chip.classList.add('is-active');
-        chip.setAttribute('aria-checked','true');
-        setPrice(parseInt(chip.getAttribute('data-apts'),10) || 0);
-      });
-    });
+    var lastPrice = -1;
+    var update = function(){
+      var apts = parseInt(slider.value,10) || 0;
+      var price = Math.max(MIN_PRICE, apts * PRICE_PER_APT);
+      if(aptsOut) aptsOut.textContent = apts;
+      slider.setAttribute('aria-valuenow', apts);
+      paintTrack(apts);
+      if(price !== lastPrice){
+        calcOut.textContent = format(price);
+        calcOut.classList.remove('is-flash');
+        void calcOut.offsetWidth;
+        calcOut.classList.add('is-flash');
+        lastPrice = price;
+      }
+    };
+    slider.addEventListener('input', update);
+    update();
   }
 
 })();

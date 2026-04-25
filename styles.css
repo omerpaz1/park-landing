@@ -519,9 +519,10 @@ h3{font-size:1.15rem;font-weight:600}
   display:flex;justify-content:center;gap:28px;
   max-width:780px;margin:0 auto;
 }
+.pricing--single{max-width:480px}
 
 .pricing__card{
-  flex:1;max-width:360px;
+  flex:1;max-width:480px;
   background:#fff;border-radius:var(--r-xl);
   border:1px solid var(--g-200);
   box-shadow:0 4px 16px rgba(0,0,0,.06);
@@ -545,79 +546,94 @@ h3{font-size:1.15rem;font-weight:600}
   border-color:var(--c-600);
 }
 
-.pricing__badge{
-  position:absolute;top:-13px;right:24px;
-  background:linear-gradient(135deg,var(--c-600),var(--c-700));
-  color:#fff;font-size:.75rem;font-weight:700;
-  padding:5px 16px;border-radius:var(--r-pill);
-  letter-spacing:.02em;
-}
-
-.pricing__head{margin-bottom:20px}
-.pricing__head h3{font-size:1.3rem;margin-bottom:4px}
-.pricing__desc{font-size:.9rem;color:var(--g-500)}
-
 .pricing__price{
-  display:flex;align-items:baseline;gap:4px;
-  margin-bottom:28px;padding-bottom:24px;
-  border-bottom:1px solid var(--g-100);
+  display:flex;align-items:baseline;justify-content:center;gap:8px;
+  margin-bottom:8px;
 }
+.pricing__price--lead{margin-bottom:6px}
 .pricing__amount{
-  font-size:2.5rem;font-weight:800;
+  font-size:3rem;font-weight:800;
   color:var(--g-900);letter-spacing:-.03em;direction:ltr;
+  display:inline-flex;align-items:baseline;
 }
-.pricing__period{font-size:1rem;color:var(--g-400);font-weight:500}
+.pricing__currency{
+  font-size:1.5rem;font-weight:700;color:var(--g-700);
+  margin-inline-end:2px;
+}
+.pricing__period{font-size:1rem;color:var(--g-500);font-weight:500}
 
-.pricing__features{
-  list-style:none;display:flex;flex-direction:column;gap:12px;
-  margin-bottom:32px;flex:1;
-}
-.pricing__features li{
-  display:flex;align-items:center;gap:10px;
-  font-size:.9375rem;color:var(--g-600);
-}
-.pricing__features li::before{
-  content:'✓';display:inline-flex;align-items:center;justify-content:center;
-  width:20px;height:20px;border-radius:50%;flex-shrink:0;
-  background:var(--c-50);color:var(--c-600);font-size:.65rem;font-weight:700;
+.pricing__minimum{
+  text-align:center;font-size:.95rem;color:var(--g-500);font-weight:500;
+  padding-bottom:22px;margin-bottom:22px;
+  border-bottom:1px dashed var(--g-200);
 }
 
-.pricing__note{
-  font-size:.85rem;color:var(--g-400);font-weight:500;
-  margin-top:-20px;margin-bottom:24px;
+/* calculator */
+.calc{
+  background:var(--g-50);
+  border:1px solid var(--g-100);
+  border-radius:var(--r);
+  padding:20px 18px;
+  margin-bottom:24px;
+}
+.calc__label{
+  text-align:center;font-size:.875rem;color:var(--g-600);
+  font-weight:500;margin-bottom:12px;
+}
+.calc__chips{
+  display:flex;gap:8px;justify-content:center;margin-bottom:18px;
+}
+.calc__chip{
+  flex:1;min-width:0;
+  background:#fff;border:1.5px solid var(--g-200);
+  border-radius:var(--r-pill);
+  padding:10px 8px;
+  font-family:inherit;font-size:1rem;font-weight:700;
+  color:var(--g-700);direction:ltr;
+  cursor:pointer;transition:all .2s var(--ease);
+}
+.calc__chip:hover{
+  border-color:var(--c-300);color:var(--c-700);
+  background:var(--c-50);
+}
+.calc__chip.is-active{
+  background:var(--c-600);color:#fff;
+  border-color:var(--c-600);
+  box-shadow:0 4px 12px rgba(37,99,235,.25);
+}
+.calc__result{
+  display:flex;align-items:baseline;justify-content:center;gap:8px;
+  padding-top:14px;border-top:1px dashed var(--g-200);
+}
+.calc__result-label{font-size:.95rem;color:var(--g-600);font-weight:500}
+.calc__result-value{
+  font-size:1.875rem;font-weight:800;color:var(--c-700);
+  letter-spacing:-.02em;direction:ltr;
+  display:inline-block;transform-origin:center;
+  transition:transform .25s var(--ease),color .25s var(--ease);
+}
+.calc__result-value.is-flash{
+  animation:calc-pop .35s var(--ease);
+}
+@keyframes calc-pop{
+  0%  {transform:scale(1)}
+  40% {transform:scale(1.12);color:var(--c-600)}
+  100%{transform:scale(1);color:var(--c-700)}
+}
+.calc__hint{
+  text-align:center;font-size:.85rem;color:var(--g-500);
+  margin-top:8px;
 }
 
-.pricing__card--mgmt{
-  border:2px solid var(--c-200);
-  box-shadow:0 8px 28px rgba(37,99,235,.10);
-  position:relative;
+.pricing__mgmt-note{
+  text-align:center;font-size:.9rem;color:var(--g-500);
+  margin:28px auto 0;max-width:560px;line-height:1.6;
 }
-.pricing__card--mgmt:hover{
-  box-shadow:0 16px 44px rgba(37,99,235,.16);
-  border-color:var(--c-500);
-}
-
-.pricing__badge--mgmt{
-  background:linear-gradient(135deg,#7c3aed,#6d28d9);
-}
-
-.pricing__includes{
-  font-size:1.05rem;font-weight:600;
-  color:var(--g-700);margin-top:-16px;margin-bottom:8px;
-}
-
-.pricing__addon{
-  font-size:.9375rem;font-weight:600;
-  color:var(--c-600);margin-bottom:24px;
-  padding:10px 16px;
-  background:var(--c-50);border-radius:var(--r);
-  border:1px solid var(--c-100);
-  text-align:center;direction:ltr;
-}
+.pricing__mgmt-note a{color:var(--c-600);font-weight:600;text-decoration:underline}
 
 .pricing__trust{
   display:flex;justify-content:center;gap:28px;flex-wrap:wrap;
-  margin-top:40px;font-size:.9375rem;color:var(--g-500);font-weight:500;
+  margin-top:24px;font-size:.9375rem;color:var(--g-500);font-weight:500;
 }
 .pricing__trust span{display:flex;align-items:center;gap:4px}
 
@@ -838,9 +854,12 @@ h3{font-size:1.15rem;font-weight:600}
 
   /* pricing */
   .pricing{flex-direction:column;align-items:stretch;gap:20px}
-  .pricing__card{max-width:100%;padding:32px 24px 28px}
+  .pricing__card{max-width:100%;padding:32px 22px 26px}
   .pricing__btn{padding:14px 20px}
-  .pricing__badge{right:20px}
+  .pricing__amount{font-size:2.5rem}
+  .calc{padding:18px 14px}
+  .calc__chip{padding:10px 4px;font-size:.95rem}
+  .calc__result-value{font-size:1.625rem}
 
   /* faq */
   .faq__item summary{padding:16px 20px;font-size:.9375rem}

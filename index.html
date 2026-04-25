@@ -278,50 +278,41 @@
   <div class="wrap">
     <header class="sec__head">
       <span class="pill pill--sm">תמחור</span>
-      <h2>פתרון חניה שמתאים לכל בניין</h2>
+      <h2>תמחור פשוט. שקוף. הוגן.</h2>
+      <p>תשלום לפי מספר הדירות בבניין — בלי מדרגות מסובכות ובלי הפתעות</p>
     </header>
 
-    <div class="pricing">
+    <div class="pricing pricing--single">
       <div class="pricing__card pricing__card--featured" data-v>
-        <div class="pricing__head">
-          <h3>ועד בית</h3>
-          <p class="pricing__desc">יותר סדר ושקט בין הדיירים</p>
+        <div class="pricing__price pricing__price--lead">
+          <span class="pricing__amount">6<span class="pricing__currency"> ₪</span></span>
+          <span class="pricing__period">לדירה / לחודש</span>
         </div>
-        <div class="pricing__price">
-          <span class="pricing__amount">₪79</span>
-          <span class="pricing__period">/ חודש</span>
-        </div>
-        <p class="pricing__note">מתאים לרוב הבניינים</p>
-        <ul class="pricing__features">
-          <li>ניהול בקשות חניה לדיירים</li>
-          <li>שיתוף חניות — אוטומטי או בין שכנים</li>
-          <li>תור אוטומטי וניהול קיבולת</li>
-          <li>התראות חכמות בזמן אמת</li>
-          <li>ממשק ניהול לוועד הבית</li>
-        </ul>
-        <a href="mailto:contact@buildingpark.app?subject=רוצה להתחיל עם BuildingPark — ועד בית&amp;body=שלום, אשמח להתחיל להשתמש ב-BuildingPark עבור הבניין שלי." class="btn btn--solid btn--block pricing__btn">התחל עכשיו</a>
-      </div>
+        <p class="pricing__minimum">מינימום 149 ₪ לבניין לחודש</p>
 
-      <div class="pricing__card pricing__card--mgmt" data-v>
-        <div class="pricing__head">
-          <h3>לחברות ניהול</h3>
-          <p class="pricing__desc">ניהול חכם של חניות במספר בניינים</p>
+        <div class="calc" role="group" aria-labelledby="calc-label">
+          <p class="calc__label" id="calc-label">כמה דירות יש בבניין?</p>
+          <div class="calc__chips" role="radiogroup" aria-label="מספר דירות">
+            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="10">10</button>
+            <button type="button" class="calc__chip is-active" role="radio" aria-checked="true" data-apts="20">20</button>
+            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="30">30</button>
+            <button type="button" class="calc__chip" role="radio" aria-checked="false" data-apts="40">40</button>
+          </div>
+          <div class="calc__result">
+            <span class="calc__result-label">מחיר חודשי:</span>
+            <span class="calc__result-value" id="calc-price" aria-live="polite">149 ₪</span>
+          </div>
+          <p class="calc__hint">פחות מקפה אחד לחודש לדייר ☕</p>
         </div>
-        <div class="pricing__price">
-          <span class="pricing__amount">₪400</span>
-          <span class="pricing__period">/ חודש</span>
-        </div>
-        <p class="pricing__includes">כולל עד 4 בניינים בחבילה</p>
-        <p class="pricing__addon">+100₪ לכל בניין נוסף</p>
-        <ul class="pricing__features">
-          <li>ממשק ניהול מרכזי</li>
-          <li>הוספת מנהלי בניינים</li>
-          <li>ניהול דיירים וחניות לכל בניין</li>
-          <li>תצוגה כללית והתראות</li>
-        </ul>
-        <a href="mailto:contact@buildingpark.app?subject=הצעה לחברת ניהול — BuildingPark&amp;body=שלום, אני מנהל/ת חברת ניהול ואשמח לקבל הצעה." class="btn btn--solid btn--block pricing__btn">קבל הצעה מותאמת</a>
+
+        <a href="mailto:contact@buildingpark.app?subject=רוצה להתחיל עם BuildingPark&amp;body=שלום, אשמח להתחיל להשתמש ב-BuildingPark עבור הבניין שלי." class="btn btn--solid btn--block pricing__btn">התחל עכשיו</a>
       </div>
     </div>
+
+    <p class="pricing__mgmt-note" data-v>
+      לחברות ניהול — תמחור מותאם בהתאם להיקף הנכסים.
+      <a href="mailto:contact@buildingpark.app?subject=הצעה לחברת ניהול — BuildingPark&amp;body=שלום, אני מנהל/ת חברת ניהול ואשמח לקבל הצעה.">צרו קשר לפרטים</a>
+    </p>
 
     <div class="pricing__trust">
       <span>✔ ללא התחייבות</span>
@@ -468,6 +459,33 @@
 
   $$('[data-v]').forEach(function(el){ io.observe(el) });
 
+  // Pricing calculator: monthly = max(MIN, apartments * RATE)
+  var PRICE_PER_APT = 6;
+  var MIN_PRICE = 149;
+  var calcChips = $$('.calc__chip');
+  var calcOut = $('#calc-price');
+  if(calcChips.length && calcOut){
+    var format = function(n){ return n.toLocaleString('en-US') + ' ₪' };
+    var setPrice = function(apts){
+      var price = Math.max(MIN_PRICE, apts * PRICE_PER_APT);
+      calcOut.textContent = format(price);
+      calcOut.classList.remove('is-flash');
+      // restart animation
+      void calcOut.offsetWidth;
+      calcOut.classList.add('is-flash');
+    };
+    calcChips.forEach(function(chip){
+      chip.addEventListener('click', function(){
+        calcChips.forEach(function(c){
+          c.classList.remove('is-active');
+          c.setAttribute('aria-checked','false');
+        });
+        chip.classList.add('is-active');
+        chip.setAttribute('aria-checked','true');
+        setPrice(parseInt(chip.getAttribute('data-apts'),10) || 0);
+      });
+    });
+  }
 
 })();
 </script>

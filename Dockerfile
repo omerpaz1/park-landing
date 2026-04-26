@@ -17,3 +17,4 @@ RUN chmod +x /docker-entrypoint.d/10-require-env.sh
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
+ 

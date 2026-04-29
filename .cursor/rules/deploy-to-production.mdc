@@ -1,0 +1,88 @@
+---
+description: Steps to deploy park-landing from main to production (Railway)
+globs:
+alwaysApply: true
+---
+
+# Deploy park-landing to Production
+
+## Branches
+
+| Branch | Purpose | Railway env |
+|---|---|---|
+| `development` | Larger refactors / WIP that isn't ready for `main` | — |
+| `main` | Stable copy ready to ship | (not auto-deployed) |
+| `production` | Live site | production (auto-deploy) |
+
+`production` is the single branch that drives Railway deploys. Pushing
+to `main` does NOT deploy. This convention is shared across all
+Railway-deployed repos in the BuildingPark stack (backend, crm, portal,
+landing).
+
+## Deployment Steps
+
+### 1. Ensure main is clean and pushed
+
+```bash
+cd /Users/omer/Documents/omer/park-landing
+git checkout main
+git status          # must be clean
+git push origin main
+```
+
+### 2. Merge main → production
+
+```bash
+git checkout production
+git pull origin production          # sync with remote first
+git merge main --no-edit            # fast-forward when possible
+```
+
+### 3. Push production to trigger Railway deploy
+
+```bash
+git push origin production
+```
+
+### 4. Switch back to main
+
+```bash
+git checkout main
+```
+
+### 5. Verify deployment
+
+- Railway auto-deploys on push to `production`
+- The landing is a static site served by nginx (see `Dockerfile` and
+  `nginx.conf`). Verify:
+  - `/` (home) loads
+  - `/delete-account` loads (Google Play compliance)
+  - any contact / lead-form CTA still works
+- If you added new HTML files, double-check `nginx.conf` serves them
+
+## Quick one-liner (when everything is already pushed to main)
+
+```bash
+git checkout production && git pull origin production && git merge main --no-edit && git push origin production && git checkout main
+```
+
+## Rollback
+
+If production breaks after deploy:
+
+```bash
+git checkout production
+git revert HEAD --no-edit       # revert the merge commit
+git push origin production
+git checkout main
+```
+
+## Rules
+
+- NEVER force-push to `production`
+- NEVER commit directly to `production` — always merge from `main`
+- The landing is the public face of the brand. Sanity-check on a
+  desktop AND a mobile viewport before merging to `main` (it ships
+  to `production` immediately after via the flow above)
+- The `/delete-account` page is required by Google Play. If you
+  ever rename or remove it, update the listing first

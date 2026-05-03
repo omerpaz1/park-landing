@@ -224,6 +224,51 @@
       border-radius:var(--r);
       font-size:.8125rem;line-height:1.55;text-align:start;
     }
+
+    /* Two-step manual path */
+    .step-list{
+      list-style:none;text-align:start;
+      margin:18px 0 4px;
+    }
+    .step-list__item{
+      display:flex;gap:14px;
+      padding:16px;margin-bottom:12px;
+      background:var(--g-50);border:1px solid var(--g-200);
+      border-radius:var(--r);
+    }
+    .step-list__item:last-child{margin-bottom:0}
+    .step-list__num{
+      flex:0 0 32px;width:32px;height:32px;border-radius:50%;
+      background:var(--c-600);color:#fff;
+      font-size:.95rem;font-weight:700;
+      display:flex;align-items:center;justify-content:center;
+    }
+    .step-list__body{flex:1;min-width:0}
+    .step-list__title{
+      font-size:1rem;font-weight:700;color:var(--g-900);
+      margin-bottom:4px;
+    }
+    .step-list__desc{
+      font-size:.85rem;color:var(--g-600);
+      margin-bottom:10px;line-height:1.55;
+    }
+    .step-list__desc strong{color:var(--g-800)}
+    .step-list__cta{
+      display:inline-flex;align-items:center;gap:6px;
+      padding:10px 16px;
+      background:#fff;color:var(--c-700);
+      border:1px solid var(--c-600);
+      border-radius:var(--r);
+      font-size:.9375rem;font-weight:600;
+      text-decoration:none;
+      transition:background .15s,color .15s;
+    }
+    .step-list__cta:hover{background:var(--c-50)}
+    .step-list__cta--primary{
+      background:var(--c-600);color:#fff;
+      border-color:var(--c-600);
+    }
+    .step-list__cta--primary:hover{background:var(--c-700);color:#fff}
     .thanks__next{
       margin-top:16px;font-size:.85rem;color:var(--g-600);
       line-height:1.6;
@@ -293,19 +338,20 @@
         </button>
       </form>
 
-      <div id="thanks" class="thanks" hidden>
+      <!-- Auto-redirect path (server added the email via API). -->
+      <div id="thanks-auto" class="thanks" hidden>
         <div class="thanks__icon" aria-hidden="true">✓</div>
         <h2 class="thanks__title">נרשמת בהצלחה</h2>
         <p class="thanks__text">
           האימייל שלך נוסף לרשימת הבודקים:
         </p>
-        <div id="thanks-email" class="thanks__email"></div>
+        <div id="thanks-email-auto" class="thanks__email"></div>
 
         <p class="thanks__redirect" id="redirectMsg" aria-live="polite">
           מעבירים אותך ל-Google Play בעוד <span id="countdown">2</span>…
         </p>
 
-        <a id="optInLink" class="thanks__cta" href="#" rel="noopener">
+        <a id="optInLinkAuto" class="thanks__cta" href="#" rel="noopener">
           המשך ידנית ל-Google Play
           <span aria-hidden="true">←</span>
         </a>
@@ -316,6 +362,54 @@
           אוטומטית לעמוד ההורדה ב-Play Store.
           <br>
           ייתכן שתופעת האפליקציה ב-Play Store תיקח 2-3 דקות לאחר ההרשמה.
+        </div>
+      </div>
+
+      <!-- Manual path: user joins the Google Group themselves. -->
+      <div id="thanks-manual" class="thanks" hidden>
+        <div class="thanks__icon" aria-hidden="true">✓</div>
+        <h2 class="thanks__title">קיבלנו את ההרשמה שלך</h2>
+        <p class="thanks__text">
+          כדי להשלים את ההצטרפות לתוכנית הבדיקות, יש 2 צעדים קצרים:
+        </p>
+
+        <ol class="step-list">
+          <li class="step-list__item">
+            <div class="step-list__num" aria-hidden="true">1</div>
+            <div class="step-list__body">
+              <h3 class="step-list__title">הצטרפות לקבוצת הבודקים</h3>
+              <p class="step-list__desc">
+                לחצו על הכפתור — Google יפתח עמוד של הקבוצה.
+                לחצו שם על <strong>"Join group"</strong> ואז סגרו את הטאב וחזרו לכאן.
+              </p>
+              <a id="joinGroupLink" class="step-list__cta step-list__cta--primary"
+                 href="#" target="_blank" rel="noopener">
+                הצטרפות לקבוצה ב-Google
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </li>
+          <li class="step-list__item">
+            <div class="step-list__num" aria-hidden="true">2</div>
+            <div class="step-list__body">
+              <h3 class="step-list__title">הצטרפות כבודק והורדת האפליקציה</h3>
+              <p class="step-list__desc">
+                אחרי שהצטרפתם לקבוצה — לחצו כאן, אז על <strong>"Become a tester"</strong>,
+                ו-Google יעביר אתכם אוטומטית לעמוד ההורדה ב-Play Store.
+              </p>
+              <a id="optInLinkManual" class="step-list__cta"
+                 href="#" target="_blank" rel="noopener">
+                המשך ל-Google Play
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </li>
+        </ol>
+
+        <div class="thanks__notice">
+          הופעת האפליקציה ב-Play Store יכולה לקחת מספר דקות לאחר שהצטרפתם
+          לקבוצה. אם הקישור בצעד 2 לא פותח את האפליקציה — המתינו 2-3 דקות
+          ונסו שוב.
         </div>
       </div>
     </section>
@@ -350,9 +444,12 @@
 
       // ── DOM refs ───────────────────────────────────────────────────────
       var form = document.getElementById('form');
-      var thanks = document.getElementById('thanks');
-      var thanksEmail = document.getElementById('thanks-email');
-      var optInLink = document.getElementById('optInLink');
+      var thanksAuto = document.getElementById('thanks-auto');
+      var thanksManual = document.getElementById('thanks-manual');
+      var thanksEmailAuto = document.getElementById('thanks-email-auto');
+      var optInLinkAuto = document.getElementById('optInLinkAuto');
+      var optInLinkManual = document.getElementById('optInLinkManual');
+      var joinGroupLink = document.getElementById('joinGroupLink');
       var redirectMsg = document.getElementById('redirectMsg');
       var countdownEl = document.getElementById('countdown');
       var alertBox = document.getElementById('alert');
@@ -437,7 +534,7 @@
           })
           .then(function (r) {
             if (r.status >= 200 && r.status < 300 && r.body && r.body.success) {
-              showSuccess(email, r.body.data && r.body.data.optInUrl);
+              showSuccess(email, r.body.data || {});
               return;
             }
 
@@ -462,17 +559,32 @@
           });
       });
 
-      function showSuccess(email, optInUrl) {
-        var fallback = 'https://play.google.com/apps/testing/com.omerpaz93.park';
-        var target = (typeof optInUrl === 'string' && optInUrl.length > 0) ? optInUrl : fallback;
+      function showSuccess(email, data) {
+        var optInFallback = 'https://play.google.com/apps/testing/com.omerpaz93.park';
+        var optInUrl = (data && typeof data.optInUrl === 'string' && data.optInUrl) || optInFallback;
+        var groupJoinUrl = (data && typeof data.groupJoinUrl === 'string' && data.groupJoinUrl) || '';
+        var status = (data && typeof data.status === 'string') ? data.status : 'manual_required';
 
-        thanksEmail.textContent = email;
-        optInLink.setAttribute('href', target);
         form.hidden = true;
-        thanks.hidden = false;
         window.scrollTo({ top: 0, behavior: 'smooth' });
 
-        scheduleRedirect(target);
+        // `manual_required` happens when the SA isn't a Manager of the
+        // group (the consumer @googlegroups.com case). The user clicks
+        // through 2 steps in Google's UI to complete signup.
+        if (status === 'manual_required') {
+          if (joinGroupLink && groupJoinUrl) joinGroupLink.setAttribute('href', groupJoinUrl);
+          if (optInLinkManual) optInLinkManual.setAttribute('href', optInUrl);
+          thanksManual.hidden = false;
+          return;
+        }
+
+        // `added` / `already_member` — server already has them in the
+        // group. Auto-redirect to the Play opt-in URL after a brief
+        // confirmation pause.
+        if (thanksEmailAuto) thanksEmailAuto.textContent = email;
+        if (optInLinkAuto) optInLinkAuto.setAttribute('href', optInUrl);
+        thanksAuto.hidden = false;
+        scheduleRedirect(optInUrl);
       }
 
       // Auto-redirect with a visible countdown. We use location.replace
@@ -502,10 +614,12 @@
           countdownEl.textContent = String(remaining);
         }, 1000);
 
-        optInLink.addEventListener('click', function () {
-          window.clearInterval(timerId);
-          if (redirectMsg) redirectMsg.textContent = 'מעבירים אותך…';
-        });
+        if (optInLinkAuto) {
+          optInLinkAuto.addEventListener('click', function () {
+            window.clearInterval(timerId);
+            if (redirectMsg) redirectMsg.textContent = 'מעבירים אותך…';
+          });
+        }
       }
     })();
   </script>

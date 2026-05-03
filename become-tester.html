@@ -230,7 +230,26 @@
        fills the card and fades in/out; only one is visible at a time.
        Mobile-first: huge tap target on the CTA, big icon + title,
        minimal text. Designed to be readable at arm's length on phones. */
-    .thanks--wiz{padding-top:4px}
+    .thanks--wiz{padding-top:4px;position:relative}
+
+    /* Back button — small ghost chevron in the top-start corner.
+       Only visible from step 2 onwards. Touch-friendly (40×40). */
+    .wiz__back{
+      position:absolute;
+      top:-4px;inset-inline-start:-4px;
+      width:40px;height:40px;
+      display:flex;align-items:center;justify-content:center;
+      background:none;border:0;
+      color:var(--g-500);
+      font-size:1.5rem;line-height:1;
+      cursor:pointer;border-radius:10px;
+      transition:background .15s,color .15s;
+      font-family:inherit;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .wiz__back:hover{background:var(--g-100);color:var(--g-800)}
+    .wiz__back:active{background:var(--g-200)}
+    .wiz__back:focus-visible{outline:2px solid var(--c-500);outline-offset:2px}
 
     /* Progress dots ────────────────────────────────────────────────── */
     .wiz__progress{
@@ -392,6 +411,16 @@
         currently visible one carries `is-current`.
       -->
       <div id="thanks-manual" class="thanks thanks--wiz" hidden>
+        <!--
+          Back button — hidden on step 1, shown from step 2 onwards.
+          Positioned absolutely in the start-corner (top-right in RTL)
+          like a native iOS/Android back chevron.
+        -->
+        <button id="wizBack" class="wiz__back" type="button"
+                hidden aria-label="חזרה לשלב הקודם">
+          <span aria-hidden="true">→</span>
+        </button>
+
         <!-- Progress dots: filled = done/current, empty = upcoming. -->
         <div class="wiz__progress" role="progressbar"
              aria-valuemin="1" aria-valuemax="3" aria-valuenow="1"
@@ -663,9 +692,14 @@
       function initWizard() {
         var steps = thanksManual.querySelectorAll('.wiz__step');
         if (!steps.length) return;
+        var backBtn = document.getElementById('wizBack');
+        // Tracked separately from DOM so the back button always knows
+        // which step we're on, even mid-animation.
+        var currentStep = 1;
 
         function showStep(n) {
           var current = clamp(n, 1, TOTAL_STEPS);
+          currentStep = current;
           steps.forEach(function (s) {
             var stepNum = parseInt(s.getAttribute('data-step') || '0', 10);
             s.hidden = stepNum !== current;
@@ -676,6 +710,7 @@
             }
           });
           updateProgress(current);
+          if (backBtn) backBtn.hidden = current === 1;
           // Bring the wizard top into view (helps when keyboard was open
           // or the user scrolled). Use the card as the anchor to avoid
           // accidentally hiding the trust badge / hero.
@@ -725,6 +760,12 @@
             });
           }
         });
+
+        if (backBtn) {
+          backBtn.addEventListener('click', function () {
+            if (currentStep > 1) showStep(currentStep - 1);
+          });
+        }
 
         showStep(1);
       }

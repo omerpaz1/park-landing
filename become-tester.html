@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>הצטרפות לבודקי האפליקציה — BuildingPark</title>
-  <meta name="description" content="הירשמו כבודקי בטא של אפליקציית BuildingPark. הזינו את האימייל של חשבון Google שלכם וקבלו גישה להורדת האפליקציה ב-Google Play.">
+  <title>הצטרפות לאפליקציה — BuildingPark</title>
+  <meta name="description" content="הצטרפו לאפליקציית BuildingPark — הזינו אימייל וקבלו גישה להורדה.">
   <meta name="theme-color" content="#2563eb">
 
   <meta property="og:type" content="website">
-  <meta property="og:title" content="הצטרפות לבודקי האפליקציה — BuildingPark">
-  <meta property="og:description" content="הירשמו כבודקי בטא וקבלו גישה להורדת האפליקציה ב-Google Play.">
+  <meta property="og:title" content="הצטרפות לאפליקציה — BuildingPark">
+  <meta property="og:description" content="הצטרפו לאפליקציית BuildingPark וקבלו גישה להורדה.">
   <meta property="og:locale" content="he_IL">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,91 +225,97 @@
       font-size:.8125rem;line-height:1.55;text-align:start;
     }
 
-    /* Three-step manual path */
-    .step-list{
-      list-style:none;text-align:start;
-      margin:18px 0 4px;
-    }
-    .step-list__item{
-      display:flex;gap:14px;
-      padding:16px;margin-bottom:12px;
-      background:#fff;border:1px solid var(--g-200);
-      border-radius:var(--r);
-      transition:opacity .2s, background .2s, border-color .2s;
-    }
-    .step-list__item:last-child{margin-bottom:0}
-    /* Locked: not yet reachable. Faded out so user knows the order. */
-    .step-list__item.is-locked{
-      opacity:.55;background:var(--g-50);
-    }
-    .step-list__item.is-locked .step-list__cta{
-      pointer-events:none;
-      background:var(--g-100);color:var(--g-500);border-color:var(--g-300);
-    }
-    /* Active: the step the user should click next. Subtle blue ring. */
-    .step-list__item.is-active{
-      border-color:var(--c-500);
-      box-shadow:0 0 0 3px var(--c-100);
-    }
-    /* Done: user has clicked the CTA. Green tint + checkmark on the number. */
-    .step-list__item.is-done{
-      background:var(--green-50);border-color:var(--green-100);
-    }
-    .step-list__num{
-      flex:0 0 32px;width:32px;height:32px;border-radius:50%;
-      background:var(--c-600);color:#fff;
-      font-size:.95rem;font-weight:700;
+    /* ── Wizard (single-card-at-a-time manual flow) ──────────────────
+       The card itself (`.card`) frames the wizard. Each `.wiz__step`
+       fills the card and fades in/out; only one is visible at a time.
+       Mobile-first: huge tap target on the CTA, big icon + title,
+       minimal text. Designed to be readable at arm's length on phones. */
+    .thanks--wiz{padding-top:4px}
+
+    /* Progress dots ────────────────────────────────────────────────── */
+    .wiz__progress{
       display:flex;align-items:center;justify-content:center;
-      transition:background .2s;
+      gap:8px;margin:4px 0 6px;
     }
-    .step-list__item.is-locked .step-list__num{background:var(--g-400)}
-    .step-list__item.is-done .step-list__num{
-      background:var(--green-600);
-      /* Replace the digit with a check via overlay */
-      font-size:0;
+    .wiz__dot{
+      width:10px;height:10px;border-radius:50%;
+      background:var(--g-200);
+      transition:background .25s,transform .25s;
     }
-    .step-list__item.is-done .step-list__num::after{
-      content:'✓';font-size:1.1rem;color:#fff;
+    .wiz__dot.is-current{
+      background:var(--c-600);transform:scale(1.4);
     }
-    .step-list__body{flex:1;min-width:0}
-    .step-list__title{
-      font-size:1rem;font-weight:700;color:var(--g-900);
-      margin-bottom:4px;
+    .wiz__dot.is-done{background:var(--green-600)}
+    .wiz__bar{
+      flex:0 0 22px;height:2px;background:var(--g-200);
+      border-radius:2px;
+      transition:background .25s;
     }
-    .step-list__desc{
-      font-size:.85rem;color:var(--g-600);
-      margin-bottom:10px;line-height:1.55;
+    .wiz__bar.is-done{background:var(--green-600)}
+    .wiz__count{
+      font-size:.75rem;color:var(--g-500);font-weight:500;
+      letter-spacing:.02em;margin-bottom:24px;
     }
-    .step-list__desc strong{color:var(--g-800)}
-    .step-list__desc em{
-      font-style:normal;color:var(--amber-700);font-weight:500;
-      font-size:.8rem;
+
+    /* Step card ────────────────────────────────────────────────────── */
+    .wiz__step{
+      animation:wiz-fade .25s ease-out;
+      padding:8px 0 4px;
     }
-    .step-list__cta{
-      display:inline-flex;align-items:center;gap:6px;
-      padding:10px 16px;
-      background:#fff;color:var(--c-700);
-      border:1px solid var(--c-600);
-      border-radius:var(--r);
-      font-size:.9375rem;font-weight:600;
-      text-decoration:none;
-      transition:background .15s,color .15s,border-color .15s;
+    @keyframes wiz-fade{
+      from{opacity:0;transform:translateY(6px)}
+      to{opacity:1;transform:none}
     }
-    .step-list__cta:hover{background:var(--c-50)}
-    .step-list__cta--primary{
+    .wiz__icon{
+      width:72px;height:72px;
+      border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 18px;
+      background:var(--g-50);
+      border:1px solid var(--g-100);
+    }
+    .wiz__icon--check{background:#dcfce7;border-color:#bbf7d0}
+    .wiz__title{
+      font-size:1.5rem;font-weight:700;color:var(--g-900);
+      line-height:1.3;margin-bottom:8px;
+    }
+    .wiz__sub{
+      font-size:1rem;color:var(--g-600);
+      line-height:1.55;margin-bottom:28px;
+      max-width:300px;margin-inline:auto;
+    }
+    .wiz__sub strong{color:var(--g-900);font-weight:700}
+    .wiz__cta{
+      display:flex;align-items:center;justify-content:center;
+      width:100%;
+      min-height:56px;padding:14px 24px;
       background:var(--c-600);color:#fff;
-      border-color:var(--c-600);
+      border:0;border-radius:var(--r);
+      font-size:1.0625rem;font-weight:700;
+      text-decoration:none;
+      transition:background .15s,transform .05s;
+      -webkit-tap-highlight-color:transparent;
     }
-    .step-list__cta--primary:hover{background:var(--c-700);color:#fff}
-    .thanks__next{
-      margin-top:16px;font-size:.85rem;color:var(--g-600);
-      line-height:1.6;
+    .wiz__cta:hover{background:var(--c-700)}
+    .wiz__cta:active{transform:scale(.985)}
+    .wiz__skip{
+      display:block;margin:14px auto 0;
+      background:none;border:0;
+      color:var(--g-500);font-size:.875rem;
+      padding:8px 12px;cursor:pointer;
+      font-family:inherit;
+    }
+    .wiz__skip:hover{color:var(--g-700);text-decoration:underline}
+    .wiz__hint{
+      margin-top:18px;font-size:.8125rem;
+      color:var(--g-500);line-height:1.55;
     }
 
     @media (min-width:600px){
       .wrap{padding:36px 20px 64px}
       .hero__title{font-size:2.125rem}
       .card{padding:32px 30px}
+      .wiz__title{font-size:1.75rem}
     }
     @media (max-width:480px){
       .hero__title{font-size:1.5rem}
@@ -329,10 +335,9 @@
     </div>
 
     <header class="hero">
-      <h1 class="hero__title">הצטרפו לבודקי האפליקציה</h1>
+      <h1 class="hero__title">הצטרפות לאפליקציה</h1>
       <p class="hero__subtitle">
-        קבלו גישה מוקדמת לאפליקציית BuildingPark ב-Google Play.
-        ההצטרפות חינמית ולוקחת פחות מדקה.
+        הזינו את כתובת האימייל שלכם כדי לקבל גישה להורדה.
       </p>
     </header>
 
@@ -340,21 +345,12 @@
       <div id="alert" class="alert alert--error" hidden role="alert"></div>
 
       <form id="form" novalidate>
-        <div class="steps" aria-hidden="true">
-          <div class="steps__title">איך זה עובד</div>
-          <ol class="steps__list">
-            <li class="steps__item">הזינו את אימייל ה-Google שלכם</li>
-            <li class="steps__item">לחצו על "הצטרפות לתוכנית הבדיקות" שיופיע</li>
-            <li class="steps__item">הורידו את האפליקציה מ-Google Play</li>
-          </ol>
-        </div>
-
         <div class="field" data-field="email">
-          <label class="field__label" for="email">אימייל ה-Google שלכם</label>
+          <label class="field__label" for="email">אימייל</label>
           <input class="field__input" id="email" name="email" type="email"
                  autocomplete="email" required maxlength="254" inputmode="email"
                  placeholder="you@gmail.com">
-          <span class="field__hint">חייב להיות אימייל המקושר לחשבון Google (Gmail או חשבון אחר עם Google)</span>
+          <span class="field__hint">השתמשו באותו אימייל שמחובר לטלפון שלכם</span>
           <span class="field__error">נא להזין כתובת אימייל תקינה</span>
         </div>
 
@@ -365,7 +361,7 @@
         </div>
 
         <button id="submit" type="submit" class="submit">
-          <span class="submit__label">הצטרפות לתוכנית הבדיקות</span>
+          <span class="submit__label">המשך</span>
           <span class="submit__spinner" aria-hidden="true"></span>
         </button>
       </form>
@@ -375,7 +371,7 @@
         <div class="thanks__icon" aria-hidden="true">✓</div>
         <h2 class="thanks__title">נרשמת בהצלחה</h2>
         <p class="thanks__text">
-          האימייל שלך נוסף לרשימת הבודקים:
+          האימייל שלך נשמר:
         </p>
         <div id="thanks-email-auto" class="thanks__email"></div>
 
@@ -384,89 +380,101 @@
         </p>
 
         <a id="optInLinkAuto" class="thanks__cta" href="#" rel="noopener">
-          המשך ידנית ל-Google Play
+          המשך ל-Google Play
           <span aria-hidden="true">←</span>
         </a>
-
-        <div class="thanks__notice">
-          <strong>בדף הבא:</strong> לחצו על
-          <strong>"Become a tester"</strong> — Google יעביר אתכם
-          אוטומטית לעמוד ההורדה ב-Play Store.
-          <br>
-          ייתכן שתופעת האפליקציה ב-Play Store תיקח 2-3 דקות לאחר ההרשמה.
-        </div>
       </div>
 
-      <!-- Manual path: user joins the Google Group themselves. -->
-      <div id="thanks-manual" class="thanks" hidden>
-        <div class="thanks__icon" aria-hidden="true">✓</div>
-        <h2 class="thanks__title">קיבלנו את ההרשמה שלך</h2>
-        <p class="thanks__text">
-          כדי להשלים את ההצטרפות לתוכנית הבדיקות, יש 3 צעדים קצרים.
-          לחצו עליהם <strong>בסדר הזה</strong>:
-        </p>
-
-        <ol class="step-list" id="stepList">
-          <li class="step-list__item is-active" data-step="1">
-            <div class="step-list__num" aria-hidden="true">1</div>
-            <div class="step-list__body">
-              <h3 class="step-list__title">הצטרפות לקבוצת הבודקים</h3>
-              <p class="step-list__desc">
-                Google יפתח עמוד של הקבוצה. לחצו שם על
-                <strong>"Join group"</strong> כדי להירשם.
-              </p>
-              <a id="joinGroupLink" class="step-list__cta step-list__cta--primary"
-                 href="#" target="_blank" rel="noopener" data-step-cta="1">
-                הצטרפות לקבוצה ב-Google
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </li>
-          <li class="step-list__item" data-step="2">
-            <div class="step-list__num" aria-hidden="true">2</div>
-            <div class="step-list__body">
-              <h3 class="step-list__title">הצטרפות כבודק ב-Google Play</h3>
-              <p class="step-list__desc">
-                בעמוד שייפתח, לחצו על
-                <strong>"Become a tester"</strong>.
-              </p>
-              <a id="optInLinkManual" class="step-list__cta"
-                 href="#" target="_blank" rel="noopener" data-step-cta="2">
-                הצטרפות כבודק
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </li>
-          <li class="step-list__item" data-step="3">
-            <div class="step-list__num" aria-hidden="true">3</div>
-            <div class="step-list__body">
-              <h3 class="step-list__title">הורדת האפליקציה</h3>
-              <p class="step-list__desc">
-                לחצו לפתוח את עמוד האפליקציה ב-Play Store ולהוריד.
-                <br>
-                <em>אם רואים "App not available" — חכו 5-10 דקות וחזרו לקישור.</em>
-              </p>
-              <a id="downloadLink" class="step-list__cta"
-                 href="#" target="_blank" rel="noopener" data-step-cta="3">
-                פתיחת האפליקציה ב-Google Play
-                <span aria-hidden="true">↗</span>
-              </a>
-            </div>
-          </li>
-        </ol>
-
-        <div class="thanks__notice">
-          לאחר שהצטרפתם לקבוצה (צעד 1), הופעת האפליקציה ב-Play Store
-          יכולה לקחת עד 10 דקות. אם צעד 3 לא פותח את עמוד ההורדה —
-          המתינו ונסו שוב.
+      <!--
+        Manual flow — single-card "wizard": one step visible at a time
+        with a progress bar at the top. Mobile-first, big touch target.
+        Each step has its own `<section class="wiz__step">` and the
+        currently visible one carries `is-current`.
+      -->
+      <div id="thanks-manual" class="thanks thanks--wiz" hidden>
+        <!-- Progress dots: filled = done/current, empty = upcoming. -->
+        <div class="wiz__progress" role="progressbar"
+             aria-valuemin="1" aria-valuemax="3" aria-valuenow="1"
+             aria-label="התקדמות הצטרפות">
+          <span class="wiz__dot is-current" data-dot="1"></span>
+          <span class="wiz__bar"></span>
+          <span class="wiz__dot" data-dot="2"></span>
+          <span class="wiz__bar"></span>
+          <span class="wiz__dot" data-dot="3"></span>
         </div>
+        <div class="wiz__count" id="wizCount" aria-live="polite">
+          שלב 1 מתוך 3
+        </div>
+
+        <!-- Step 1 -->
+        <section class="wiz__step is-current" data-step="1">
+          <div class="wiz__icon wiz__icon--google" aria-hidden="true">
+            <!-- Multicolor "G" — instantly recognizable. -->
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3c-1.6 4.7-6.1 8-11.3 8-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.9 1.2 8 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.6 8.3 6.3 14.7z"/>
+              <path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-7.9l-6.5 5C9.5 39.6 16.2 44 24 44z"/>
+              <path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.6l6.2 5.2C40.9 35.7 44 30.3 44 24c0-1.3-.1-2.4-.4-3.5z"/>
+            </svg>
+          </div>
+          <h2 class="wiz__title">המשך עם Google</h2>
+          <p class="wiz__sub">במסך שייפתח לחצו על <strong>"Join group"</strong></p>
+          <a id="joinGroupLink" class="wiz__cta"
+             href="#" target="_blank" rel="noopener" data-cta="1">
+            המשך
+          </a>
+          <button type="button" class="wiz__skip" data-skip="1" hidden>
+            כבר עשיתי — דלג
+          </button>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="wiz__step" data-step="2" hidden>
+          <div class="wiz__icon wiz__icon--play" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <path fill="#00C9D7" d="M6 4.5v39c0 .8.4 1.6 1.1 2L26 25 7.1 2.5C6.4 2.9 6 3.7 6 4.5z"/>
+              <path fill="#FFCE00" d="M37.5 19.5l-7-4-4.5 5 4.5 5 7-4c1.7-1 1.7-3 0-2z"/>
+              <path fill="#FF4131" d="M7.1 2.5L26 25l4.5-5z"/>
+              <path fill="#00B167" d="M7.1 47.5L30.5 30l-4.5-5z"/>
+            </svg>
+          </div>
+          <h2 class="wiz__title">המשך ב-Google Play</h2>
+          <p class="wiz__sub">במסך שייפתח לחצו על <strong>"Become a tester"</strong></p>
+          <a id="optInLinkManual" class="wiz__cta"
+             href="#" target="_blank" rel="noopener" data-cta="2">
+            המשך
+          </a>
+          <button type="button" class="wiz__skip" data-skip="2">
+            כבר עשיתי — דלג
+          </button>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="wiz__step" data-step="3" hidden>
+          <div class="wiz__icon wiz__icon--check" aria-hidden="true">
+            <svg viewBox="0 0 48 48" width="44" height="44">
+              <circle cx="24" cy="24" r="22" fill="#16A34A"/>
+              <path d="M14 24l7 7 13-14" stroke="#fff" stroke-width="3.5"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            </svg>
+          </div>
+          <h2 class="wiz__title">הכל מוכן</h2>
+          <p class="wiz__sub">האפליקציה ממתינה להורדה ב-Google Play</p>
+          <a id="downloadLink" class="wiz__cta"
+             href="#" target="_blank" rel="noopener" data-cta="3">
+            הורדת האפליקציה
+          </a>
+          <p class="wiz__hint">
+            אם רואים "App not available" — המתינו דקה ונסו שוב.
+          </p>
+        </section>
       </div>
     </section>
 
     <p class="footer-note">
-      בלחיצה על הצטרפות הינכם מאשרים שנוכל ליצור איתכם קשר בנושא תוכנית הבדיקות.
+      בלחיצה על המשך הינכם מאשרים שנוכל ליצור איתכם קשר.
       <br>
-      קראו על <a href="/privacy.html">מדיניות הפרטיות</a> שלנו.
+      קראו את <a href="/privacy.html">מדיניות הפרטיות</a> שלנו.
     </p>
   </main>
 
@@ -500,7 +508,7 @@
       var optInLinkManual = document.getElementById('optInLinkManual');
       var joinGroupLink = document.getElementById('joinGroupLink');
       var downloadLink = document.getElementById('downloadLink');
-      var stepListEl = document.getElementById('stepList');
+      var wizCountEl = document.getElementById('wizCount');
       var redirectMsg = document.getElementById('redirectMsg');
       var countdownEl = document.getElementById('countdown');
       var alertBox = document.getElementById('alert');
@@ -623,11 +631,13 @@
 
         // `manual_required` — the user clicks through 3 steps in
         // Google's UI to complete signup (join group → opt-in → install).
+        // We render a single-step-at-a-time "wizard" so the user is
+        // never overwhelmed with 3 buttons at once.
         if (status === 'manual_required') {
           if (joinGroupLink && groupJoinUrl) joinGroupLink.setAttribute('href', groupJoinUrl);
           if (optInLinkManual) optInLinkManual.setAttribute('href', optInUrl);
           if (downloadLink) downloadLink.setAttribute('href', downloadUrl);
-          initStepProgress();
+          initWizard();
           thanksManual.hidden = false;
           return;
         }
@@ -641,38 +651,86 @@
         scheduleRedirect(optInUrl);
       }
 
-      // Step gating UX. The next step is locked until the user clicks
-      // the previous step's CTA. We can't actually verify they completed
-      // the action on Google's side (different origin), so this is
-      // best-effort visual guidance — it stops casual users from
-      // clicking step 2/3 first and then complaining nothing works.
-      function initStepProgress() {
-        if (!stepListEl) return;
+      // ── Single-step wizard ─────────────────────────────────────────
+      // Only one step is visible at a time. Clicking the CTA opens the
+      // external action in a new tab AND advances us to the next step
+      // (so when the user returns to this tab they can keep going).
+      // A small "כבר עשיתי — דלג" link lets users who already did a
+      // step jump forward without doing it again. We can't verify
+      // completion across origins; this is best-effort guidance.
+      var TOTAL_STEPS = 3;
 
-        var items = stepListEl.querySelectorAll('.step-list__item');
-        if (!items.length) return;
+      function initWizard() {
+        var steps = thanksManual.querySelectorAll('.wiz__step');
+        if (!steps.length) return;
 
-        function setItemState(item, state) {
-          item.classList.remove('is-locked', 'is-active', 'is-done');
-          if (state) item.classList.add(state);
-        }
-
-        // Initial state: step 1 active, the rest locked.
-        for (var i = 0; i < items.length; i++) {
-          setItemState(items[i], i === 0 ? 'is-active' : 'is-locked');
-        }
-
-        items.forEach(function (item) {
-          var cta = item.querySelector('[data-step-cta]');
-          if (!cta) return;
-          cta.addEventListener('click', function () {
-            // Mark this step done and unlock the next one.
-            setItemState(item, 'is-done');
-            var stepNum = parseInt(item.getAttribute('data-step') || '0', 10);
-            var next = stepListEl.querySelector('[data-step="' + (stepNum + 1) + '"]');
-            if (next) setItemState(next, 'is-active');
+        function showStep(n) {
+          var current = clamp(n, 1, TOTAL_STEPS);
+          steps.forEach(function (s) {
+            var stepNum = parseInt(s.getAttribute('data-step') || '0', 10);
+            s.hidden = stepNum !== current;
+            if (stepNum === current) {
+              s.classList.add('is-current');
+            } else {
+              s.classList.remove('is-current');
+            }
           });
+          updateProgress(current);
+          // Bring the wizard top into view (helps when keyboard was open
+          // or the user scrolled). Use the card as the anchor to avoid
+          // accidentally hiding the trust badge / hero.
+          thanksManual.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function updateProgress(current) {
+          var prog = thanksManual.querySelector('.wiz__progress');
+          if (prog) prog.setAttribute('aria-valuenow', String(current));
+          if (wizCountEl) {
+            wizCountEl.textContent = 'שלב ' + current + ' מתוך ' + TOTAL_STEPS;
+          }
+          var dots = thanksManual.querySelectorAll('.wiz__dot');
+          var bars = thanksManual.querySelectorAll('.wiz__bar');
+          dots.forEach(function (dot) {
+            var n = parseInt(dot.getAttribute('data-dot') || '0', 10);
+            dot.classList.remove('is-current', 'is-done');
+            if (n < current) dot.classList.add('is-done');
+            else if (n === current) dot.classList.add('is-current');
+          });
+          bars.forEach(function (bar, i) {
+            // Bar i sits between dot (i+1) and dot (i+2). Mark "done"
+            // when we've already moved past the dot it follows.
+            if (i + 1 < current) bar.classList.add('is-done');
+            else bar.classList.remove('is-done');
+          });
+        }
+
+        // Wire up CTA clicks → advance, but don't preventDefault — we
+        // want the link to open in the new tab. Use a microtask so the
+        // browser actually navigates before we re-render.
+        steps.forEach(function (step) {
+          var cta = step.querySelector('[data-cta]');
+          if (cta) {
+            cta.addEventListener('click', function () {
+              var n = parseInt(cta.getAttribute('data-cta') || '0', 10);
+              if (n < TOTAL_STEPS) {
+                setTimeout(function () { showStep(n + 1); }, 250);
+              }
+            });
+          }
+          var skip = step.querySelector('[data-skip]');
+          if (skip) {
+            skip.addEventListener('click', function () {
+              var n = parseInt(skip.getAttribute('data-skip') || '0', 10);
+              if (n < TOTAL_STEPS) showStep(n + 1);
+            });
+          }
         });
+
+        showStep(1);
+      }
+
+      function clamp(n, lo, hi) {
+        return Math.max(lo, Math.min(hi, n));
       }
 
       // Auto-redirect with a visible countdown. We use location.replace
